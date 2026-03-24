@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SaySalam — Learn Kyrgyz from English or Russian. Interactive lessons, vocabulary, quizzes.">
+  <title>SaySalam — Learn Kyrgyz</title>
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap)" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <header class="header" id="page-top">
+    <nav class="navbar">
+      <a href="#home" class="logo" aria-label="SaySalam — home">
+        <img src="images/SaySalam_logo.png" alt="SaySalam" class="logo__img">
+        <span class="logo__text">Say<span>Salam</span></span>
+      </a>
+
+      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-list" role="list">
+        <li><a href="#home"     data-i18n="nav.home">Home</a></li>
+        <li><a href="#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="#learn"    data-i18n="nav.learn">Learn</a></li>
+        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="lang-switcher" role="group" aria-label="Language switcher">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <span class="lang-divider">|</span>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+        <a href="#learn" class="btn btn--primary btn--sm" data-i18n="nav.cta">Start Learning</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__dots"></div>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__content fade-up">
+          <span class="hero__tag" data-i18n="hero.tag">🌍 Language Learning Platform</span>
+          <h1 id="hero-heading" data-i18n="hero.title">Learn Kyrgyz<br><em>Easily</em></h1>
+          <p data-i18n="hero.subtitle">
+            From English or Russian — fast, interactive, and fun.
+            Start your journey to fluency today.
+          </p>
+          <div class="hero__actions">
+            <a href="#learn" class="btn btn--primary btn--large" data-i18n="hero.cta1">Start Learning</a>
+            <a href="#download" class="btn btn--outline btn--large" data-i18n="hero.cta2">Download App</a>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <strong class="count" data-target="50000">0</strong>
+              <span data-i18n="hero.stat1">Learners</span>
+            </div>
+            <div class="hero__stat-divider"></div>
+            <div class="hero__stat">
+              <strong class="count" data-target="200">0</strong>
+              <span data-i18n="hero.stat2">Lessons</span>
+            </div>
+            <div class="hero__stat-divider"></div>
+            <div class="hero__stat">
+              <strong class="count" data-target="4">0</strong>
+              <span data-i18n="hero.stat3">Languages</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__visual fade-up fade-up--delay-2" aria-hidden="true">
+          <div class="phone-mockup">
+            <div class="phone-mockup__screen">
+              <div class="pm-bar"></div>
+              <div class="pm-lesson">
+                <span class="pm-lesson__tag" data-i18n="mockup.tag">Daily Lesson</span>
+                <p class="pm-lesson__word">Саламатсызбы?</p>
+                <p class="pm-lesson__trans" data-i18n="mockup.trans">How are you?</p>
+                <div class="pm-progress">
+                  <div class="pm-progress__bar"></div>
+                </div>
+                <div class="pm-choices">
+                  <button class="pm-choice pm-choice--correct" data-i18n="mockup.c1">How are you?</button>
+                  <button class="pm-choice" data-i18n="mockup.c2">Good morning</button>
+                  <button class="pm-choice" data-i18n="mockup.c3">Thank you</button>
+                </div>
+              </div>
+            </div>
+            <div class="phone-mockup__glow"></div>
+          </div>
+          <!-- Floating badges -->
+          <div class="float-badge float-badge--1">
+            <span>🔥</span>
+            <div>
+              <strong>7</strong>
+              <small data-i18n="badge.streak">Day Streak</small>
+            </div>
+          </div>
+          <div class="float-badge float-badge--2">
+            <span>⭐</span>
+            <div>
+              <strong>+20 XP</strong>
+              <small data-i18n="badge.xp">Earned today</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#features" class="hero__scroll" aria-label="Scroll down">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- ========== FEATURES ========== -->
+    <section id="features" class="section" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section__head fade-up">
+          <span class="section__tag" data-i18n="features.tag">Why SaySalam</span>
+          <h2 id="features-heading" data-i18n="features.title">Everything you need to learn Kyrgyz</h2>
+          <p data-i18n="features.sub">Proven methods, interactive tools, and a curriculum built for real results.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card fade-up">
+            <div class="feature-card__icon" style="--clr:#4f8ef7">📚</div>
+            <h3 data-i18n="feat1.title">Interactive Lessons</h3>
+            <p data-i18n="feat1.desc">Structured courses from zero to conversational. Learn grammar, phrases, and culture.</p>
+          </div>
+          <div class="feature-card fade-up fade-up--delay-1">
+            <div class="feature-card__icon" style="--clr:#7c5cf7">🧠</div>
+            <h3 data-i18n="feat2.title">Vocabulary Training</h3>
+            <p data-i18n="feat2.desc">Spaced repetition flashcards that adapt to your learning pace for maximum retention.</p>
+          </div>
+          <div class="feature-card fade-up fade-up--delay-2">
+            <div class="feature-card__icon" style="--clr:#f75c8e">🎙️</div>
+            <h3 data-i18n="feat3.title">Pronunciation Practice</h3>
+            <p data-i18n="feat3.desc">Listen to native speakers and train your ear with audio exercises for every lesson.</p>
+          </div>
+          <div class="feature-card fade-up fade-up--delay-3">
+            <div class="feature-card__icon" style="--clr:#f79c4f">🎮</div>
+            <h3 data-i18n="feat4.title">Gamified Quizzes</h3>
+            <p data-i18n="feat4.desc">Earn XP, maintain streaks, and challenge friends. Learning Kyrgyz has never been this fun.</p>
+          </div>
+          <div class="feature-card fade-up fade-up--delay-1">
+            <div class="feature-card__icon" style="--clr:#4fcfaf">📊</div>
+            <h3 data-i18n="feat5.title">Progress Tracking</h3>
+            <p data-i18n="feat5.desc">Visual progress bars and weekly reports keep you motivated and on track.</p>
+          </div>
+          <div class="feature-card fade-up fade-up--delay-2">
+            <div class="feature-card__icon" style="--clr:#f7e25c">🌐</div>
+            <h3 data-i18n="feat6.title">Offline Access</h3>
+            <p data-i18n="feat6.desc">Download lessons and study anywhere — no internet connection required.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== LANGUAGE SELECTION ========== -->
+    <section id="learn" class="section section--alt" aria-labelledby="learn-heading">
+      <div class="container">
+        <div class="section__head fade-up">
+          <span class="section__tag" data-i18n="learn.tag">Choose Your Path</span>
+          <h2 id="learn-heading" data-i18n="learn.title">Learn Kyrgyz from your language</h2>
+          <p data-i18n="learn.sub">Select your native language and get a personalised learning path.</p>
+        </div>
+
+        <div class="lang-cards fade-up">
+          <div class="lang-card lang-card--active" id="pathEN" data-path="en" role="button" tabindex="0" aria-pressed="true">
+            <div class="lang-card__flag">🇬🇧</div>
+            <h3 data-i18n="path.en.title">From English</h3>
+            <p data-i18n="path.en.desc">Lessons, grammar explanations, and exercises in English.</p>
+            <span class="lang-card__badge" data-i18n="path.badge">Most popular</span>
+          </div>
+          <div class="lang-card" id="pathRU" data-path="ru" role="button" tabindex="0" aria-pressed="false">
+            <div class="lang-card__flag">🇷🇺</div>
+            <h3 data-i18n="path.ru.title">From Russian</h3>
+            <p data-i18n="path.ru.desc">Уроки, объяснения грамматики и упражнения на русском языке.</p>
+            <span class="lang-card__badge lang-card__badge--gray" data-i18n="path.badge2">Also available</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TRY A LESSON ========== -->
+    <section id="demo" class="section" aria-labelledby="demo-heading">
+      <div class="container container--narrow">
+        <div class="section__head fade-up">
+          <span class="section__tag" data-i18n="demo.tag">Try for Free</span>
+          <h2 id="demo-heading" data-i18n="demo.title">Try a Lesson — Right Now</h2>
+          <p data-i18n="demo.sub">No sign-up required. Pick the correct translation and see how it works.</p>
+        </div>
+
+        <div class="quiz-card fade-up" id="quizCard">
+          <!-- Progress -->
+          <div class="quiz-progress">
+            <div class="quiz-progress__track">
+              <div class="quiz-progress__fill" id="quizProgress"></div>
+            </div>
+            <span class="quiz-progress__label" id="quizLabel">1 / 5</span>
+          </div>
+
+          <!-- Question -->
+          <div class="quiz-body" id="quizBody">
+            <p class="quiz-word" id="quizWord"></p>
+            <p class="quiz-prompt" data-i18n="quiz.prompt">Choose the correct translation:</p>
+            <ul class="quiz-options" id="quizOptions" role="list"></ul>
+          </div>
+
+          <!-- Result -->
+          <div class="quiz-result hidden" id="quizResult">
+            <div class="quiz-result__icon" id="quizResultIcon"></div>
+            <p class="quiz-result__text" id="quizResultText"></p>
+          </div>
+
+          <!-- Score screen -->
+          <div class="quiz-score hidden" id="quizScore">
+            <div class="quiz-score__emoji" id="scoreEmoji"></div>
+            <h3 data-i18n="quiz.score.title">Lesson Complete!</h3>
+            <p class="quiz-score__sub" id="scoreText"></p>
+            <div class="quiz-score__xp">+<span id="scoreXP">0</span> XP</div>
+            <button class="btn btn--primary" id="quizRestart" data-i18n="quiz.restart">Try Again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== DOWNLOAD ========== -->
+    <section id="download" class="section section--alt" aria-labelledby="download-heading">
+      <div class="container">
+        <div class="section__head fade-up">
+          <span class="section__tag" data-i18n="dl.tag">Get the App</span>
+          <h2 id="download-heading" data-i18n="dl.title">Learn on any device</h2>
+          <p data-i18n="dl.sub">Switch seamlessly between web and mobile. Your progress syncs automatically.</p>
+        </div>
+
+        <div class="download-toggle fade-up" role="group" aria-label="Platform selector">
+          <button class="toggle-btn active" data-platform="mobile" data-i18n="dl.mobile">📱 Mobile App</button>
+          <button class="toggle-btn" data-platform="web" data-i18n="dl.web">🌐 Web Version</button>
+        </div>
+
+        <div class="download-panel" id="panelMobile">
+          <div class="download-content fade-up">
+            <h3 data-i18n="dl.mobile.title">Take SaySalam everywhere</h3>
+            <p data-i18n="dl.mobile.desc">Download the app and learn on the go. Works offline, syncs with your web account.</p>
+            <div class="store-btns">
+              <a href="#" class="store-btn" aria-label="Download on App Store">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <div>
+                  <small data-i18n="store.avail">Available on the</small>
+                  <strong data-i18n="store.apple">App Store</strong>
+                </div>
+              </a>
+              <a href="#" class="store-btn" aria-label="Get it on Google Play">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M3.18 23.76c.34.19.72.24 1.1.14l12.19-7.03-2.64-2.64-10.65 9.53zm-1.5-20.1C1.45 3.97 1.5 4.3 1.5 4.67v14.66c0 .37-.05.7.18 1.01l.09.08 8.22-8.22v-.19L1.59 3.58l.09.08zM20.32 10.5l-2.4-1.38-2.95 2.95 2.95 2.95 2.42-1.4c.69-.4.69-1.72-.02-2.12zM4.28.24L16.47 7.27l-2.64 2.64L3.18.38C3.52.28 3.94.05 4.28.24z"/></svg>
+                <div>
+                  <small data-i18n="store.get">Get it on</small>
+                  <strong data-i18n="store.google">Google Play</strong>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="download-visual fade-up fade-up--delay-2">
+            <div class="dl-mockup">
+              <div class="dl-mockup__badge">
+                <span>📲</span>
+                <span data-i18n="dl.free">Free Download</span>
+              </div>
+              <div class="dl-mockup__screen">
+                <div class="dl-screen-item">
+                  <span>🔥</span>
+                  <div>
+                    <strong data-i18n="dl.s1">Daily Streak</strong>
+                    <div class="dl-bar"><div class="dl-bar__fill" style="width:70%"></div></div>
+                  </div>
+                </div>
+                <div class="dl-screen-item">
+                  <span>⭐</span>
+                  <div>
+                    <strong data-i18n="dl.s2">XP This Week</strong>
+                    <div class="dl-bar"><div class="dl-bar__fill" style="width:55%"></div></div>
+                  </div>
+                </div>
+                <div class="dl-screen-item">
+                  <span>📚</span>
+                  <div>
+                    <strong data-i18n="dl.s3">Lessons Done</strong>
+                    <div class="dl-bar"><div class="dl-bar__fill" style="width:85%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="download-panel hidden" id="panelWeb">
+          <div class="web-panel fade-up">
+            <div class="web-panel__icon">🌐</div>
+            <h3 data-i18n="web.title">Start in your browser — no install needed</h3>
+            <p data-i18n="web.desc">The full SaySalam experience is available right here. Sign up for free and begin your first lesson in seconds.</p>
+            <a href="#learn" class="btn btn--primary btn--large" data-i18n="web.cta">Open Web App</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <a href="#home" class="logo">
+          <img src="images/SaySalam_logo.png" alt="SaySalam" class="logo__img">
+          <span class="logo__text">Say<span>Salam</span></span>
+        </a>
+        <p data-i18n="footer.desc">The friendliest way to learn Kyrgyz. From English or Russian — for free.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" aria-label="Telegram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer__nav" aria-label="Platform links">
+        <strong data-i18n="footer.platform">Platform</strong>
+        <a href="#home"     data-i18n="nav.home">Home</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#learn"    data-i18n="nav.learn">Learn</a>
+        <a href="#download" data-i18n="nav.download">Download</a>
+      </nav>
+
+      <nav class="footer__nav" aria-label="Language links">
+        <strong data-i18n="footer.languages">Languages</strong>
+        <a href="#learn" data-i18n="footer.from_en">Kyrgyz from English</a>
+        <a href="#learn" data-i18n="footer.from_ru">Kyrgyz from Russian</a>
+        <a href="#demo"  data-i18n="footer.try">Try a Lesson</a>
+      </nav>
+
+      <div class="footer__contact">
+        <strong data-i18n="footer.contact">Contact</strong>
+        <a href="mailto:hello@saysalam.kg">hello@saysalam.kg</a>
+        <a href="[t.me](https://t.me/saysalam)" target="_blank" rel="noopener">Telegram</a>
+        <span>Bishkek, Kyrgyzstan 🇰🇬</span>
+      </div>
+
+    </div>
+    <p class="footer__copy">© 2026 SaySalam. Made with ❤️ in Kyrgyzstan.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
