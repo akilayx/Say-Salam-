@@ -25,10 +25,12 @@
       </button>
 
       <ul class="nav-links" id="nav-list" role="list">
-        <li><a href="#home"     data-i18n="nav.home">Home</a></li>
-        <li><a href="#features" data-i18n="nav.features">Features</a></li>
-        <li><a href="#learn"    data-i18n="nav.learn">Learn</a></li>
-        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+        <li><a href="#home"       data-i18n="nav.home">Home</a></li>
+        <li><a href="#features"   data-i18n="nav.features">Features</a></li>
+        <li><a href="#lessons"    data-i18n="nav.lessons">Lessons</a></li>
+        <li><a href="#flashcards" data-i18n="nav.flashcards">Flashcards</a></li>
+        <li><a href="#ai-tools"   data-i18n="nav.tools">AI Tools</a></li>
+        <li><a href="#download"   data-i18n="nav.download">Download</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -238,6 +240,174 @@
             <p class="quiz-score__sub" id="scoreText"></p>
             <div class="quiz-score__xp">+<span id="scoreXP">0</span> XP</div>
             <button class="btn btn--primary" id="quizRestart" data-i18n="quiz.restart">Try Again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== DOWNLOAD ========== -->
+    <!-- ========== LESSON TREE ========== -->
+    <section id="lessons" class="section section--alt" aria-labelledby="lessons-heading">
+      <div class="container">
+        <div class="section__head fade-up">
+          <span class="section__tag" data-i18n="tree.tag">Learning Path</span>
+          <h2 id="lessons-heading" data-i18n="tree.title">Your Kyrgyz Journey</h2>
+          <p data-i18n="tree.sub">Tap a lesson to start. Complete each level to unlock the next.</p>
+        </div>
+        <div class="tree-wrapper fade-up">
+          <div class="tree-track">
+            <div class="tree-node tree-node--done" data-level="1" tabindex="0" role="button">
+              <div class="tree-node__btn">✓</div>
+              <div class="tree-node__info"><span data-i18n="tree.l1.title">Greetings</span><small>+40 XP</small></div>
+            </div>
+            <div class="tree-connector tree-connector--done"></div>
+            <div class="tree-node tree-node--active" data-level="2" tabindex="0" role="button">
+              <div class="tree-node__btn">2</div>
+              <div class="tree-node__info"><span data-i18n="tree.l2.title">Numbers</span><small>+40 XP</small></div>
+            </div>
+            <div class="tree-connector"></div>
+            <div class="tree-node tree-node--locked" data-level="3" tabindex="-1" aria-disabled="true">
+              <div class="tree-node__btn">🔒</div>
+              <div class="tree-node__info"><span data-i18n="tree.l3.title">Colors</span><small>+40 XP</small></div>
+            </div>
+            <div class="tree-connector"></div>
+            <div class="tree-node tree-node--locked" data-level="4" tabindex="-1" aria-disabled="true">
+              <div class="tree-node__btn">🔒</div>
+              <div class="tree-node__info"><span data-i18n="tree.l4.title">Family</span><small>+40 XP</small></div>
+            </div>
+            <div class="tree-connector"></div>
+            <div class="tree-node tree-node--locked" data-level="5" tabindex="-1" aria-disabled="true">
+              <div class="tree-node__btn">🔒</div>
+              <div class="tree-node__info"><span data-i18n="tree.l5.title">Food &amp; Drinks</span><small>+40 XP</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-panel hidden" id="lessonPanel">
+          <div class="lesson-panel__header">
+            <span class="lesson-panel__title" id="lessonTitle"></span>
+            <button class="lesson-panel__close" id="lessonClose" aria-label="Close">✕</button>
+          </div>
+          <div class="lesson-panel__body" id="lessonBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FLASHCARDS ========== -->
+    <section id="flashcards" class="section" aria-labelledby="flashcards-heading">
+      <div class="container container--narrow">
+        <div class="section__head fade-up">
+          <span class="section__tag" data-i18n="fc.tag">Flashcards</span>
+          <h2 id="flashcards-heading" data-i18n="fc.title">Master Vocabulary Fast</h2>
+          <p data-i18n="fc.sub">Click the card to flip. Mark cards as known or review them again.</p>
+        </div>
+        <div class="flashcard-wrap fade-up">
+          <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Flip card">
+            <div class="flashcard__inner">
+              <div class="flashcard__front">
+                <span class="flashcard__emoji" id="fcEmoji">👋</span>
+                <p class="flashcard__word" id="fcWord">Саламатсызбы?</p>
+                <span class="flashcard__hint" data-i18n="fc.hint">Click to reveal</span>
+              </div>
+              <div class="flashcard__back">
+                <p class="flashcard__translation" id="fcTranslation"></p>
+                <p class="flashcard__example" id="fcExample"></p>
+              </div>
+            </div>
+          </div>
+          <div class="flashcard__counter"><span id="fcCounter">1 / 10</span></div>
+          <div class="flashcard__actions">
+            <button class="btn--fc btn--fc-repeat" id="fcRepeat">🔄 <span data-i18n="fc.repeat">Repeat</span></button>
+            <button class="btn btn--outline btn--sm" id="fcPrev">←</button>
+            <button class="btn btn--outline btn--sm" id="fcNext">→</button>
+            <button class="btn--fc btn--fc-know" id="fcKnow">✓ <span data-i18n="fc.know">Know it</span></button>
+          </div>
+          <div class="flashcard__progress-row">
+            <span>🟢 <span id="fcKnownCount">0</span> <span data-i18n="fc.known">known</span></span>
+            <span>🟡 <span id="fcReviewCount">10</span> <span data-i18n="fc.review">to review</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== AI TOOLS ========== -->
+    <section id="ai-tools" class="section section--alt" aria-labelledby="ai-tools-heading">
+      <div class="container">
+        <div class="section__head fade-up">
+          <span class="section__tag" data-i18n="ai.tag">AI-Powered Tools</span>
+          <h2 id="ai-tools-heading" data-i18n="ai.title">Speak, See &amp; Translate</h2>
+          <p data-i18n="ai.sub">Three powerful tools to supercharge your Kyrgyz practice.</p>
+        </div>
+        <div class="ai-tabs fade-up" role="tablist">
+          <button class="ai-tab active" data-tab="tutor" role="tab" aria-selected="true">🎙️ <span data-i18n="ai.tab1">Voice Tutor</span></button>
+          <button class="ai-tab" data-tab="photo" role="tab" aria-selected="false">📷 <span data-i18n="ai.tab2">Photo Translator</span></button>
+          <button class="ai-tab" data-tab="voice" role="tab" aria-selected="false">🗣️ <span data-i18n="ai.tab3">Voice Translator</span></button>
+        </div>
+        <!-- Voice Tutor -->
+        <div class="ai-panel" id="panelTutor">
+          <div class="tutor-card fade-up">
+            <div class="tutor__avatar">🤖</div>
+            <p class="tutor__instruction" data-i18n="tutor.instruction">Listen to the phrase, then repeat it:</p>
+            <div class="tutor__phrase-box">
+              <p class="tutor__phrase" id="tutorPhrase">Саламатсызбы?</p>
+              <p class="tutor__trans" id="tutorTrans">How are you?</p>
+              <button class="tutor__listen-btn" id="tutorListen" aria-label="Listen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                <span data-i18n="tutor.listen">Listen</span>
+              </button>
+            </div>
+            <div class="tutor__record-area">
+              <button class="tutor__record-btn" id="tutorRecord" aria-label="Record voice">
+                <span class="tutor__record-icon">🎤</span>
+              </button>
+              <p class="tutor__rec-label" id="tutorRecordLabel">Tap to Speak</p>
+              <div class="tutor__feedback hidden" id="tutorFeedback"></div>
+            </div>
+            <div class="tutor__nav">
+              <button class="btn btn--outline btn--sm" id="tutorPrev" data-i18n="tutor.prev">← Previous</button>
+              <button class="btn btn--primary btn--sm" id="tutorNext" data-i18n="tutor.next">Next →</button>
+            </div>
+          </div>
+        </div>
+        <!-- Photo Translator -->
+        <div class="ai-panel hidden" id="panelPhoto">
+          <div class="photo-card fade-up">
+            <div class="photo-upload-area" id="photoDropZone">
+              <input type="file" id="photoInput" accept="image/*" class="sr-only">
+              <div class="photo-upload__icon">📷</div>
+              <p data-i18n="photo.upload">Drop an image or click to upload</p>
+              <small data-i18n="photo.hint">Supports JPG, PNG, WEBP</small>
+              <label for="photoInput" class="btn btn--primary btn--sm photo-upload__btn" data-i18n="photo.btn">Choose Photo</label>
+            </div>
+            <div class="photo-result hidden" id="photoResult">
+              <img id="photoPreview" alt="Uploaded photo" class="photo-preview">
+              <div class="photo-labels" id="photoLabels"></div>
+              <button class="btn btn--outline btn--sm" id="photoClear" data-i18n="photo.clear">← Try another</button>
+            </div>
+          </div>
+        </div>
+        <!-- Voice Translator -->
+        <div class="ai-panel hidden" id="panelVoice">
+          <div class="voice-card fade-up">
+            <div class="voice-cols">
+              <div class="voice-col">
+                <span class="voice-col__lang">🇬🇧 EN / 🇷🇺 RU</span>
+                <div class="voice-col__text" id="voiceInput">
+                  <span class="voice-placeholder" data-i18n="voice.placeholder">Your speech will appear here...</span>
+                </div>
+              </div>
+              <div class="voice-col__arrow">→</div>
+              <div class="voice-col">
+                <span class="voice-col__lang">🇰🇬 Кыргызча</span>
+                <div class="voice-col__text voice-col__text--result" id="voiceOutput">
+                  <span class="voice-placeholder" data-i18n="voice.result">Translation will appear here...</span>
+                </div>
+              </div>
+            </div>
+            <div class="voice-controls">
+              <button class="voice-mic-btn" id="voiceMicBtn" aria-label="Start recording">🎤</button>
+              <p class="voice-mic-label" id="voiceMicLabel">Tap to speak</p>
+            </div>
+            <div class="voice-history" id="voiceHistory"></div>
           </div>
         </div>
       </div>
