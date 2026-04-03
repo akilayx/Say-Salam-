@@ -465,6 +465,11 @@ button { font-family: var(--font); }
 
 .download-content h3  { font-size: 1.5rem; font-weight: 800; margin-bottom: .75rem; }
 .download-content > p { color: var(--muted); margin-bottom: 2rem; }
+.download-apk-btn {
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
 
 .store-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 .store-btn {
@@ -654,6 +659,28 @@ button { font-family: var(--font); }
   .lang-cards     { grid-template-columns: 1fr; }
   .footer__inner  { grid-template-columns: 1fr; }
   .store-btns     { flex-direction: column; }
+  .download-toggle {
+    width: 100%;
+    max-width: 100%;
+    padding: 4px;
+  }
+  .toggle-btn {
+    flex: 1 1 0;
+    text-align: center;
+    padding: .7rem 1rem;
+  }
+  .download-content {
+    text-align: center;
+  }
+  .download-apk-btn,
+  .store-btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+  .store-btn div {
+    align-items: flex-start;
+  }
   .hero__scroll   { display: none; }
 
   .quiz-card { padding: 1.5rem; }
