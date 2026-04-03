@@ -1,1136 +1,1082 @@
-/* ============================================================
-   script.js — SaySalam
-   ============================================================ */
-
-'use strict';
-
-
-/* ============================================================
-   1. TRANSLATIONS
-   ============================================================ */
-
-const translations = {
+﻿'use strict';
+ 
+// ═══════════════════════════════════════════════════════════
+// I18N
+// ═══════════════════════════════════════════════════════════
+const I18N = {
   en: {
-    'nav.home':     'Home',
-    'nav.features': 'Features',
-    'nav.learn':    'Learn',
-    'nav.download': 'Download',
-    'nav.cta':      'Start Learning',
-
-    'hero.tag':     '🌍 Language Learning Platform',
-    'hero.title':   'Learn Kyrgyz<br><em>Easily</em>',
-    'hero.subtitle':'From English or Russian — fast, interactive, and fun. Start your journey to fluency today.',
-    'hero.cta1':    'Start Learning',
-    'hero.cta2':    'Download App',
-    'hero.stat1':   'Learners',
-    'hero.stat2':   'Lessons',
-    'hero.stat3':   'Languages',
-
-    'mockup.tag':   'Daily Lesson',
-    'mockup.trans': 'How are you?',
-    'mockup.c1':    'How are you?',
-    'mockup.c2':    'Good morning',
-    'mockup.c3':    'Thank you',
-
-    'badge.streak': 'Day Streak',
-    'badge.xp':     'Earned today',
-
-    'features.tag': 'Why SaySalam',
-    'features.title':'Everything you need to learn Kyrgyz',
-    'features.sub': 'Proven methods, interactive tools, and a curriculum built for real results.',
-    'feat1.title':  'Interactive Lessons',
-    'feat1.desc':   'Structured courses from zero to conversational. Learn grammar, phrases, and culture.',
-    'feat2.title':  'Vocabulary Training',
-    'feat2.desc':   'Spaced repetition flashcards that adapt to your learning pace for maximum retention.',
-    'feat3.title':  'Pronunciation Practice',
-    'feat3.desc':   'Listen to native speakers and train your ear with audio exercises for every lesson.',
-    'feat4.title':  'Gamified Quizzes',
-    'feat4.desc':   'Earn XP, maintain streaks, and challenge friends. Learning Kyrgyz has never been this fun.',
-    'feat5.title':  'Progress Tracking',
-    'feat5.desc':   'Visual progress bars and weekly reports keep you motivated and on track.',
-    'feat6.title':  'Offline Access',
-    'feat6.desc':   'Download lessons and study anywhere — no internet connection required.',
-
-    'learn.tag':      'Choose Your Path',
-    'learn.title':    'Learn Kyrgyz from your language',
-    'learn.sub':      'Select your native language and get a personalised learning path.',
-    'path.en.title':  'From English',
-    'path.en.desc':   'Lessons, grammar explanations, and exercises in English.',
-    'path.ru.title':  'From Russian',
-    'path.ru.desc':   'Lessons, grammar explanations, and exercises in Russian.',
-    'path.badge':     'Most popular',
-    'path.badge2':    'Also available',
-
-    'demo.tag':   'Try for Free',
-    'demo.title': 'Try a Lesson — Right Now',
-    'demo.sub':   'No sign-up required. Pick the correct translation and see how it works.',
+    'nav.home':'Home','nav.features':'Features','nav.lessons':'Lessons',
+    'nav.flashcards':'Flashcards','nav.tools':'AI Tools','nav.download':'Download',
+    'nav.cta':'Start Learning','nav.learn':'Learn',
+    'hero.tag':'🌍 Language Learning Platform','hero.title':'Learn Kyrgyz<br><em>Easily</em>',
+    'hero.subtitle':'From English or Russian — fast, interactive, and fun.',
+    'hero.cta1':'Start Learning','hero.cta2':'Download App',
+    'hero.stat1':'Learners','hero.stat2':'Lessons','hero.stat3':'Languages',
+    'mockup.tag':'Daily Lesson','mockup.trans':'How are you?',
+    'mockup.c1':'How are you?','mockup.c2':'Good morning','mockup.c3':'Thank you',
+    'badge.streak':'Day Streak','badge.xp':'Earned today',
+    'features.tag':'Why SaySalam','features.title':'Everything you need to learn Kyrgyz',
+    'features.sub':'Proven methods, interactive tools, and a curriculum built for real results.',
+    'feat1.title':'Interactive Lessons','feat1.desc':'Structured courses from zero to conversational.',
+    'feat2.title':'Vocabulary Training','feat2.desc':'Spaced repetition flashcards that adapt to your learning pace.',
+    'feat3.title':'Pronunciation Practice','feat3.desc':'Listen to native speakers and train your ear.',
+    'feat4.title':'Gamified Quizzes','feat4.desc':'Earn XP, maintain streaks, and challenge friends.',
+    'feat5.title':'Progress Tracking','feat5.desc':'Visual progress bars and weekly reports.',
+    'feat6.title':'Offline Access','feat6.desc':'Download lessons and study anywhere.',
+    'learn.tag':'Choose Your Path','learn.title':'Learn Kyrgyz from your language',
+    'learn.sub':'Select your native language and get a personalised learning path.',
+    'path.en.title':'From English','path.en.desc':'Lessons and exercises in English.',
+    'path.ru.title':'From Russian','path.ru.desc':'Уроки и упражнения на русском языке.',
+    'path.badge':'Most popular','path.badge2':'Also available',
+    'demo.tag':'Try for Free','demo.title':'Try a Lesson — Right Now',
+    'demo.sub':'No sign-up required. Pick the correct translation.',
     'quiz.prompt':'Choose the correct translation:',
-    'quiz.restart':'Try Again',
-    'quiz.correct':'Correct! 🎉',
-    'quiz.wrong':  'Not quite — the right answer was:',
-    'quiz.score.title':'Lesson Complete!',
-
-    'dl.tag':         'Get the App',
-    'dl.title':       'Learn on any device',
-    'dl.sub':         'Switch seamlessly between web and mobile. Your progress syncs automatically.',
-    'dl.mobile':      '📱 Mobile App',
-    'dl.web':         '🌐 Web Version',
-    'dl.mobile.title':'Take SaySalam everywhere',
-    'dl.mobile.desc': 'Download the app and learn on the go. Works offline, syncs with your web account.',
-    'dl.free':        'Free Download',
-    'dl.s1':          'Daily Streak',
-    'dl.s2':          'XP This Week',
-    'dl.s3':          'Lessons Done',
-    'store.avail':    'Available on the',
-    'store.apple':    'App Store',
-    'store.get':      'Get it on',
-    'store.google':   'Google Play',
-    'web.title':      'Start in your browser — no install needed',
-    'web.desc':       'The full SaySalam experience is available right here. Sign up for free and begin your first lesson in seconds.',
-    'web.cta':        'Open Web App',
-
-    'footer.desc':    'The friendliest way to learn Kyrgyz. From English or Russian — for free.',
-    'footer.platform':'Platform',
-    'footer.languages':'Languages',
-    'footer.contact': 'Contact',
-    'footer.from_en': 'Kyrgyz from English',
-    'footer.from_ru': 'Kyrgyz from Russian',
-    'footer.try':     'Try a Lesson',
-    'nav.lessons':    'Lessons',
-    'nav.flashcards': 'Flashcards',
-    'nav.tools':      'AI Tools',
-
-    'tree.tag':       'Learning Path',
-    'tree.title':     'Your Kyrgyz Journey',
-    'tree.sub':       'Tap a lesson to start. Complete each level to unlock the next.',
-    'tree.l1.title':  'Greetings',
-    'tree.l2.title':  'Numbers',
-    'tree.l3.title':  'Colors',
-    'tree.l4.title':  'Family',
-    'tree.l5.title':  'Food & Drinks',
-
-    'fc.tag':         'Flashcards',
-    'fc.title':       'Master Vocabulary Fast',
-    'fc.sub':         'Click the card to flip. Mark cards as known or review them again.',
-    'fc.hint':        'Click to reveal',
-    'fc.repeat':      'Repeat',
-    'fc.know':        'Know it',
-    'fc.known':       'known',
-    'fc.review':      'to review',
-
-    'ai.tag':         'AI-Powered Tools',
-    'ai.title':       'Speak, See & Translate',
-    'ai.sub':         'Three powerful tools to supercharge your Kyrgyz practice.',
-    'ai.tab1':        'Voice Tutor',
-    'ai.tab2':        'Photo Translator',
-    'ai.tab3':        'Voice Translator',
-
-    'tutor.instruction': 'Listen to the phrase, then repeat it:',
-    'tutor.listen':   'Listen',
-    'tutor.prev':     '← Previous',
-    'tutor.next':     'Next →',
-
-    'photo.upload':   'Drop an image or click to upload',
-    'photo.hint':     'Supports JPG, PNG, WEBP',
-    'photo.btn':      'Choose Photo',
-    'photo.clear':    '← Try another',
-
-    'voice.placeholder': 'Your speech will appear here...',
-    'voice.result':   'Translation will appear here...',
+    'quiz.score.title':'Lesson Complete!','quiz.restart':'Try Again',
+    'tree.tag':'Learning Path','tree.title':'Your Kyrgyz Journey',
+    'tree.sub':'Tap a lesson to start. Complete each level to unlock the next.',
+    'tree.l1.title':'Greetings','tree.l2.title':'Numbers','tree.l3.title':'Colors',
+    'tree.l4.title':'Family','tree.l5.title':'Food & Drinks',
+    'fc.tag':'Flashcards','fc.title':'Master Vocabulary Fast',
+    'fc.sub':'Click the card to flip. Mark cards as known or review them again.',
+    'fc.hint':'Click to reveal','fc.repeat':'Repeat','fc.know':'Know it',
+    'fc.known':'known','fc.review':'to review',
+    'ai.tag':'AI-Powered Tools','ai.title':'Speak, See & Translate',
+    'ai.sub':'Three powerful tools to supercharge your Kyrgyz practice.',
+    'ai.tab1':'Voice Tutor','ai.tab2':'Photo Translator','ai.tab3':'Voice Translator',
+    'tutor.instruction':'Listen to the phrase, then repeat it:',
+    'tutor.listen':'Listen','tutor.prev':'Previous','tutor.next':'Next',
+    'photo.upload':'Drop an image or click to upload',
+    'photo.hint':'Supports JPG, PNG, WEBP','photo.btn':'Choose Photo','photo.clear':'Try another',
+    'voice.placeholder':'Your speech will appear here...','voice.result':'Translation will appear here...',
+    'dl.tag':'Get the App','dl.title':'Learn on any device',
+    'dl.sub':'Switch seamlessly between web and mobile.',
+    'dl.mobile':'📱 Mobile App','dl.web':'🌐 Web Version',
+    'dl.mobile.title':'Take SaySalam everywhere','dl.mobile.desc':'Download the app and learn on the go.',
+    'store.avail':'Available on the','store.apple':'App Store',
+    'store.get':'Get it on','store.google':'Google Play',
+    'dl.free':'Free Download','dl.s1':'Daily Streak','dl.s2':'XP This Week','dl.s3':'Lessons Done',
+    'web.title':'Start in your browser','web.desc':'The full SaySalam experience is available right here.',
+    'web.cta':'Open Web App',
+    'footer.desc':'The friendliest way to learn Kyrgyz. For free.',
+    'footer.platform':'Platform','footer.languages':'Languages',
+    'footer.from_en':'Kyrgyz from English','footer.from_ru':'Kyrgyz from Russian',
+    'footer.try':'Try a Lesson','footer.contact':'Contact',
   },
-
   ru: {
-    'nav.home':     'Главная',
-    'nav.features': 'Возможности',
-    'nav.learn':    'Учиться',
-    'nav.download': 'Скачать',
-    'nav.cta':      'Начать учёбу',
-
-    'hero.tag':     '🌍 Платформа изучения языков',
-    'hero.title':   'Учи кыргызский<br><em>легко</em>',
-    'hero.subtitle':'С русского или английского — быстро, интерактивно и весело. Начни свой путь к свободному общению.',
-    'hero.cta1':    'Начать учёбу',
-    'hero.cta2':    'Скачать приложение',
-    'hero.stat1':   'Учеников',
-    'hero.stat2':   'Уроков',
-    'hero.stat3':   'Языка',
-
-    'mockup.tag':   'Урок дня',
-    'mockup.trans': 'Как дела?',
-    'mockup.c1':    'Как дела?',
-    'mockup.c2':    'Доброе утро',
-    'mockup.c3':    'Спасибо',
-
-    'badge.streak': 'дней подряд',
-    'badge.xp':     'Заработано сегодня',
-
-    'features.tag': 'Почему SaySalam',
-    'features.title':'Всё для изучения кыргызского',
-    'features.sub': 'Проверенные методики, интерактивные инструменты и программа для реальных результатов.',
-    'feat1.title':  'Интерактивные уроки',
-    'feat1.desc':   'Структурированные курсы от нуля до разговорного уровня. Грамматика, фразы и культура.',
-    'feat2.title':  'Тренировка словаря',
-    'feat2.desc':   'Карточки с интервальными повторениями, адаптированные к твоему темпу обучения.',
-    'feat3.title':  'Практика произношения',
-    'feat3.desc':   'Слушай носителей языка и тренируй слух с помощью аудиоупражнений.',
-    'feat4.title':  'Игровые тесты',
-    'feat4.desc':   'Зарабатывай XP, поддерживай серии и бросай вызов друзьям. Учёба как никогда не была такой весёлой.',
-    'feat5.title':  'Отслеживание прогресса',
-    'feat5.desc':   'Визуальные полосы прогресса и еженедельные отчёты держат тебя в тонусе.',
-    'feat6.title':  'Офлайн-доступ',
-    'feat6.desc':   'Скачивай уроки и занимайся где угодно — без подключения к интернету.',
-
-    'learn.tag':      'Выбери путь',
-    'learn.title':    'Учи кыргызский с твоего языка',
-    'learn.sub':      'Выбери родной язык и получи персональный план обучения.',
-    'path.en.title':  'С английского',
-    'path.en.desc':   'Уроки, объяснения грамматики и упражнения на английском.',
-    'path.ru.title':  'С русского',
-    'path.ru.desc':   'Уроки, объяснения грамматики и упражнения на русском языке.',
-    'path.badge':     'Самый популярный',
-    'path.badge2':    'Также доступно',
-
-    'demo.tag':   'Попробуй бесплатно',
-    'demo.title': 'Попробуй урок — прямо сейчас',
-    'demo.sub':   'Без регистрации. Выбери правильный перевод и посмотри, как это работает.',
+    'nav.home':'Главная','nav.features':'Возможности','nav.lessons':'Уроки',
+    'nav.flashcards':'Карточки','nav.tools':'AI Инструменты','nav.download':'Скачать',
+    'nav.cta':'Начать учиться','nav.learn':'Учиться',
+    'hero.tag':'🌍 Платформа для изучения языков',
+    'hero.title':'Учи кыргызский<br><em>Легко</em>',
+    'hero.subtitle':'С английского или русского — быстро, интерактивно и весело.',
+    'hero.cta1':'Начать учиться','hero.cta2':'Скачать приложение',
+    'hero.stat1':'Учеников','hero.stat2':'Уроков','hero.stat3':'Языка',
+    'mockup.tag':'Урок дня','mockup.trans':'Как дела?',
+    'mockup.c1':'Как дела?','mockup.c2':'Доброе утро','mockup.c3':'Спасибо',
+    'badge.streak':'Дней подряд','badge.xp':'Заработано сегодня',
+    'features.tag':'Почему SaySalam','features.title':'Всё для изучения кыргызского',
+    'features.sub':'Проверенные методы и интерактивные инструменты.',
+    'feat1.title':'Интерактивные уроки','feat1.desc':'Структурированные курсы с нуля до разговорного.',
+    'feat2.title':'Тренировка словаря','feat2.desc':'Карточки с интервальными повторениями.',
+    'feat3.title':'Практика произношения','feat3.desc':'Слушай носителей языка и тренируй слух.',
+    'feat4.title':'Игровые викторины','feat4.desc':'Зарабатывай XP и соревнуйся с друзьями.',
+    'feat5.title':'Отслеживание прогресса','feat5.desc':'Визуальные графики и еженедельные отчёты.',
+    'feat6.title':'Офлайн-доступ','feat6.desc':'Загружай уроки и учись где угодно.',
+    'learn.tag':'Выбери путь','learn.title':'Учи кыргызский со своего языка',
+    'learn.sub':'Выбери родной язык и получи персонализированный путь обучения.',
+    'path.en.title':'С английского','path.en.desc':'Уроки и упражнения на английском.',
+    'path.ru.title':'С русского','path.ru.desc':'Уроки и упражнения на русском.',
+    'path.badge':'Популярнее всего','path.badge2':'Тоже доступно',
+    'demo.tag':'Попробуй бесплатно','demo.title':'Попробуй урок прямо сейчас',
+    'demo.sub':'Без регистрации. Выбери правильный перевод.',
     'quiz.prompt':'Выбери правильный перевод:',
-    'quiz.restart':'Попробовать снова',
-    'quiz.correct':'Правильно! 🎉',
-    'quiz.wrong':  'Не совсем — правильный ответ:',
-    'quiz.score.title':'Урок завершён!',
-
-    'dl.tag':         'Скачай приложение',
-    'dl.title':       'Учись на любом устройстве',
-    'dl.sub':         'Переключайся между вебом и мобильным. Прогресс синхронизируется автоматически.',
-    'dl.mobile':      '📱 Приложение',
-    'dl.web':         '🌐 Веб-версия',
-    'dl.mobile.title':'Бери SaySalam везде',
-    'dl.mobile.desc': 'Скачай приложение и учись на ходу. Работает офлайн, синхронизируется с аккаунтом.',
-    'dl.free':        'Бесплатно',
-    'dl.s1':          'Дней подряд',
-    'dl.s2':          'XP на этой неделе',
-    'dl.s3':          'Уроков пройдено',
-    'store.avail':    'Доступно в',
-    'store.apple':    'App Store',
-    'store.get':      'Скачай в',
-    'store.google':   'Google Play',
-    'web.title':      'Начни в браузере — установка не нужна',
-    'web.desc':       'Полный опыт SaySalam доступен прямо здесь. Зарегистрируйся бесплатно и начни первый урок.',
-    'web.cta':        'Открыть веб-приложение',
-
-    'footer.desc':    'Самый дружелюбный способ учить кыргызский. С русского или английского — бесплатно.',
-    'footer.platform':'Платформа',
-    'footer.languages':'Языки',
-    'footer.contact': 'Контакты',
-    'footer.from_en': 'Кыргызский с английского',
-    'footer.from_ru': 'Кыргызский с русского',
-    'footer.try':     'Попробовать урок',
-    'nav.lessons':    'Уроки',
-    'nav.flashcards': 'Карточки',
-    'nav.tools':      'ИИ-инструменты',
-
-    'tree.tag':       'Путь обучения',
-    'tree.title':     'Твой путь в кыргызском',
-    'tree.sub':       'Нажми на урок, чтобы начать. Завершай уровни, чтобы открывать новые.',
-    'tree.l1.title':  'Приветствия',
-    'tree.l2.title':  'Числа',
-    'tree.l3.title':  'Цвета',
-    'tree.l4.title':  'Семья',
-    'tree.l5.title':  'Еда и напитки',
-
-    'fc.tag':         'Карточки',
-    'fc.title':       'Быстро запомни слова',
-    'fc.sub':         'Нажми на карточку, чтобы перевернуть. Отмечай знакомые слова.',
-    'fc.hint':        'Нажми, чтобы увидеть',
-    'fc.repeat':      'Повторить',
-    'fc.know':        'Знаю',
-    'fc.known':       'знакомых',
-    'fc.review':      'на повторение',
-
-    'ai.tag':         'ИИ-инструменты',
-    'ai.title':       'Говори, смотри и переводи',
-    'ai.sub':         'Три мощных инструмента для практики кыргызского.',
-    'ai.tab1':        'Голосовой тьютор',
-    'ai.tab2':        'Фото-переводчик',
-    'ai.tab3':        'Голосовой переводчик',
-
-    'tutor.instruction': 'Послушай фразу, затем повтори её:',
-    'tutor.listen':   'Послушать',
-    'tutor.prev':     '← Назад',
-    'tutor.next':     'Далее →',
-
-    'photo.upload':   'Перетащи фото или нажми для загрузки',
-    'photo.hint':     'Поддерживается JPG, PNG, WEBP',
-    'photo.btn':      'Выбрать фото',
-    'photo.clear':    '← Попробовать другое',
-
-    'voice.placeholder': 'Ваша речь появится здесь...',
-    'voice.result':   'Перевод появится здесь...',
+    'quiz.score.title':'Урок завершён!','quiz.restart':'Попробовать снова',
+    'tree.tag':'Путь обучения','tree.title':'Твой путь в кыргызский',
+    'tree.sub':'Нажми на урок чтобы начать.',
+    'tree.l1.title':'Приветствия','tree.l2.title':'Числа','tree.l3.title':'Цвета',
+    'tree.l4.title':'Семья','tree.l5.title':'Еда и напитки',
+    'fc.tag':'Карточки','fc.title':'Быстро запоминай слова',
+    'fc.sub':'Нажми на карточку чтобы перевернуть. Отмечай знакомые слова.',
+    'fc.hint':'Нажми чтобы увидеть','fc.repeat':'Повторить','fc.know':'Знаю',
+    'fc.known':'известно','fc.review':'на повторение',
+    'ai.tag':'AI Инструменты','ai.title':'Говори, Смотри и Переводи',
+    'ai.sub':'Три мощных инструмента для практики кыргызского.',
+    'ai.tab1':'Голосовой тьютор','ai.tab2':'Фото переводчик','ai.tab3':'Голосовой переводчик',
+    'tutor.instruction':'Слушай фразу, затем повтори:',
+    'tutor.listen':'Слушать','tutor.prev':'Назад','tutor.next':'Далее',
+    'photo.upload':'Перетащи изображение или нажми для загрузки',
+    'photo.hint':'Поддерживаются JPG, PNG, WEBP',
+    'photo.btn':'Выбрать фото','photo.clear':'Другое фото',
+    'voice.placeholder':'Ваша речь появится здесь...','voice.result':'Перевод появится здесь...',
+    'dl.tag':'Получить приложение','dl.title':'Учись на любом устройстве',
+    'dl.sub':'Переключайся между вебом и мобильным.',
+    'dl.mobile':'📱 Мобильное приложение','dl.web':'🌐 Веб версия',
+    'dl.mobile.title':'Бери SaySalam везде','dl.mobile.desc':'Скачай приложение и учись на ходу.',
+    'store.avail':'Доступно в','store.apple':'App Store',
+    'store.get':'Получить в','store.google':'Google Play',
+    'dl.free':'Бесплатно','dl.s1':'Дней подряд','dl.s2':'XP на этой неделе','dl.s3':'Уроков пройдено',
+    'web.title':'Начни в браузере','web.desc':'Полный опыт SaySalam прямо здесь.',
+    'web.cta':'Открыть веб-приложение',
+    'footer.desc':'Самый дружелюбный способ учить кыргызский. Бесплатно.',
+    'footer.platform':'Платформа','footer.languages':'Языки',
+    'footer.from_en':'Кыргызский с английского','footer.from_ru':'Кыргызский с русского',
+    'footer.try':'Попробовать урок','footer.contact':'Контакты',
   }
 };
-
+ 
 let currentLang = 'en';
-
-function applyTranslations(lang) {
+ 
+function applyI18n(lang) {
   currentLang = lang;
-  // Restart quiz in the new language
-  currentQ = 0;
-  score    = 0;
-  if (quizBody)  quizBody.style.display  = '';
-  if (quizScore) quizScore.classList.add('hidden');
-  if (quizResult) quizResult.classList.add('hidden');
-  loadQuestion(0);
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    const val = translations[lang]?.[key];
-    if (val === undefined) return;
-    if (key === 'hero.title') {
-      el.innerHTML = val;
-    } else {
-      el.textContent = val;
-    }
+    const key = el.dataset.i18n;
+    const val = I18N[lang][key];
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+    else if (key === 'hero.title') el.innerHTML = val;
+    else el.textContent = val;
   });
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.lang === lang);
-  });
-  // Refresh dynamic content when language changes
-  if (typeof renderTutorPhrase === 'function') renderTutorPhrase(tutorIndex);
-  if (typeof renderFlashcard   === 'function') renderFlashcard(fcIndex);
-  if (typeof voiceInputEl !== 'undefined' && voiceInputEl) {
-    voiceInputEl.innerHTML  = `<span class="voice-placeholder">${translations[lang]['voice.placeholder']}</span>`;
-    voiceOutputEl.innerHTML = `<span class="voice-placeholder">${translations[lang]['voice.result']}</span>`;
-    if (typeof resetVoice === 'function') resetVoice(false);
-  }
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
 }
+ 
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => { applyI18n(btn.dataset.lang); initQuiz(); });
+});
+ 
+// ═══════════════════════════════════════════════════════════
+// BURGER
+// ═══════════════════════════════════════════════════════════
+function initBurger() {
+  const burger = document.querySelector('.burger');
+  const navList = document.getElementById('nav-list');
+  const header = document.querySelector('.header');
+  const navActions = document.querySelector('.nav-actions');
+  if (!burger || !navList) return;
 
-
-/* ============================================================
-   2. BURGER MENU
-   ============================================================ */
-
-const burger  = document.querySelector('.burger');
-const navList = document.getElementById('nav-list');
-const header  = document.querySelector('.header');
-
-if (burger && navList) {
-  burger.addEventListener('click', () => {
-    const open = navList.classList.toggle('open');
+  const setState = (open) => {
+    navList.classList.toggle('nav-links--open', open);
+    navList.classList.toggle('open', open);
+    navActions?.classList.toggle('open', open);
+    header?.classList.toggle('menu-open', open);
     burger.setAttribute('aria-expanded', String(open));
     document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  burger.addEventListener('click', () => {
+    const open = !navList.classList.contains('open') && !navList.classList.contains('nav-links--open');
+    setState(open);
   });
-  navList.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', closeMenu)
-  );
-  document.addEventListener('click', e => {
-    if (!burger.contains(e.target) && !navList.contains(e.target)) closeMenu();
+  navList.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setState(false));
   });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape') setState(false);
   });
 }
-
-function closeMenu() {
-  navList?.classList.remove('open');
-  burger?.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
+ 
+// ═══════════════════════════════════════════════════════════
+// SCROLL ANIMATIONS
+// ═══════════════════════════════════════════════════════════
+function initScrollAnimations() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 }
-
-
-/* ============================================================
-   3. NAVBAR SCROLL SHADOW
-   ============================================================ */
-
-window.addEventListener('scroll', () => {
-  header?.classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
-
-
-/* ============================================================
-   4. LANG SWITCHER
-   ============================================================ */
-
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => applyTranslations(btn.dataset.lang));
-});
-
-
-/* ============================================================
-   5. FADE-UP SCROLL ANIMATIONS
-   ============================================================ */
-
-const fadeObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      fadeObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
-
-
-/* ============================================================
-   6. ANIMATED COUNTERS
-   ============================================================ */
-
-function animateCounter(el, target, suffix, duration = 1800) {
-  const start = performance.now();
-  (function tick(now) {
-    const p = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.floor(eased * target).toLocaleString() + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-    else el.textContent = target.toLocaleString() + suffix;
-  })(start);
-}
-
-const countEls = document.querySelectorAll('.count');
-const countObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el  = e.target;
-    const tgt = parseInt(el.dataset.target, 10);
-    const sfx = tgt >= 1000 ? '+' : '+';
-    animateCounter(el, tgt, sfx);
-    countObserver.unobserve(el);
-  });
-}, { threshold: 0.5 });
-
-countEls.forEach(el => countObserver.observe(el));
-
-
-/* ============================================================
-   7. LANGUAGE PATH SELECTION
-   ============================================================ */
-
-document.querySelectorAll('.lang-card').forEach(card => {
-  card.addEventListener('click',   () => selectPath(card));
-  card.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPath(card); }
-  });
-});
-
-function selectPath(card) {
-  document.querySelectorAll('.lang-card').forEach(c => {
-    c.classList.remove('lang-card--active');
-    c.setAttribute('aria-pressed', 'false');
-  });
-  card.classList.add('lang-card--active');
-  card.setAttribute('aria-pressed', 'true');
-}
-
-
-/* ============================================================
-   8. DOWNLOAD TOGGLE
-   ============================================================ */
-
-const panelMobile = document.getElementById('panelMobile');
-const panelWeb    = document.getElementById('panelWeb');
-
-document.querySelectorAll('.toggle-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    if (btn.dataset.platform === 'mobile') {
-      panelMobile?.classList.remove('hidden');
-      panelWeb?.classList.add('hidden');
-    } else {
-      panelWeb?.classList.remove('hidden');
-      panelMobile?.classList.add('hidden');
-    }
-  });
-});
-
-
-/* ============================================================
-   9. QUIZ
-   ============================================================ */
-
-const quizDataEN = [
-  { word: 'Саламатсызбы?', correct: 'How are you?',      options: ['How are you?',     'Good morning',    'Thank you',          'Goodbye']          },
-  { word: 'Рахмат',        correct: 'Thank you',          options: ['Please',           'Thank you',       'Hello',              'Good night']       },
-  { word: 'Кечиресиз',     correct: 'Excuse me / Sorry',  options: ['You\'re welcome',  'Excuse me / Sorry','Congratulations',    'See you later']    },
-  { word: 'Жакшы',         correct: 'Good / Fine',        options: ['Bad',              'Good / Fine',     'Beautiful',          'Fast']             },
-  { word: 'Сүйлөшөлү',     correct: 'Let\'s talk',       options: ['Let\'s eat',       'Let\'s walk',    'Let\'s talk',       'Let\'s rest']      },
-];
-
-const quizDataRU = [
-  { word: 'Саламатсызбы?', correct: 'Как дела?',          options: ['Как дела?',        'Доброе утро',     'Спасибо',            'До свидания']      },
-  { word: 'Рахмат',        correct: 'Спасибо',            options: ['Пожалуйста',       'Спасибо',         'Привет',             'Спокойной ночи']   },
-  { word: 'Кечиресиз',     correct: 'Извините / Простите',options: ['Пожалуйста',       'Поздравляю',      'Извините / Простите','До встречи']       },
-  { word: 'Жакшы',         correct: 'Хорошо / Нормально', options: ['Плохо',            'Хорошо / Нормально','Красиво',          'Быстро']           },
-  { word: 'Сүйлөшөлү',     correct: 'Давай поговорим',    options: ['Давай поедим',     'Давай погуляем',  'Давай поговорим',    'Давай отдохнём']   },
-];
-
-function getQuizData() { return currentLang === 'ru' ? quizDataRU : quizDataEN; }
-
-let currentQ  = 0;
-let score     = 0;
-let answered  = false;
-
-const quizProgress  = document.getElementById('quizProgress');
-const quizLabel     = document.getElementById('quizLabel');
-const quizWord      = document.getElementById('quizWord');
-const quizOptions   = document.getElementById('quizOptions');
-const quizBody      = document.getElementById('quizBody');
-const quizResult    = document.getElementById('quizResult');
-const quizResultIcon = document.getElementById('quizResultIcon');
-const quizResultText = document.getElementById('quizResultText');
-const quizScore     = document.getElementById('quizScore');
-const scoreEmoji    = document.getElementById('scoreEmoji');
-const scoreText     = document.getElementById('scoreText');
-const scoreXP       = document.getElementById('scoreXP');
-const quizRestart   = document.getElementById('quizRestart');
-
-function loadQuestion(index) {
-  answered = false;
-  quizResult?.classList.add('hidden');
-
-  const qd  = getQuizData();
-  const q   = qd[index];
-  const pct = (index / qd.length) * 100;
-
-  if (quizProgress) quizProgress.style.width = pct + '%';
-  if (quizLabel)    quizLabel.textContent = `${index + 1} / ${qd.length}`;
-  if (quizWord)     quizWord.textContent  = q.word;
-
-  if (quizOptions) {
-    quizOptions.innerHTML = '';
-    const shuffled = [...q.options].sort(() => Math.random() - .5);
-    shuffled.forEach(opt => {
-      const li  = document.createElement('li');
-      const btn = document.createElement('button');
-      btn.className   = 'quiz-option';
-      btn.textContent = opt;
-      btn.addEventListener('click', () => handleAnswer(btn, opt, q.correct));
-      li.appendChild(btn);
-      quizOptions.appendChild(li);
+ 
+// ═══════════════════════════════════════════════════════════
+// COUNTERS
+// ═══════════════════════════════════════════════════════════
+function initCounters() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = +el.dataset.target;
+      let cur = 0;
+      const step = target / (1800 / 16);
+      const tick = () => {
+        cur = Math.min(cur + step, target);
+        el.textContent = target >= 1000 ? Math.round(cur).toLocaleString() + '+' : Math.round(cur);
+        if (cur < target) requestAnimationFrame(tick);
+      };
+      tick();
+      obs.unobserve(el);
     });
-  }
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => obs.observe(el));
 }
-
-function handleAnswer(btn, chosen, correct) {
-  if (answered) return;
-  answered = true;
-
-  const allBtns = quizOptions?.querySelectorAll('.quiz-option');
-  allBtns?.forEach(b => { b.disabled = true; });
-
-  const isCorrect = chosen === correct;
-  if (isCorrect) score++;
-
-  btn.classList.add(isCorrect ? 'correct' : 'wrong');
-
-  // Highlight correct answer if wrong
-  if (!isCorrect) {
-    allBtns?.forEach(b => {
-      if (b.textContent === correct) b.classList.add('correct');
-    });
-  }
-
-  // Show result flash
-  if (quizResult && quizResultIcon && quizResultText) {
-    quizResult.classList.remove('hidden');
-    quizResult.className = `quiz-result quiz-result--${isCorrect ? 'correct' : 'wrong'}`;
-    quizResultIcon.textContent = isCorrect ? '🎉' : '😕';
-    const t = translations[currentLang];
-    quizResultText.textContent = isCorrect
-      ? (t?.['quiz.correct']  || 'Correct! 🎉')
-      : `${t?.['quiz.wrong'] || 'Not quite —'} ${correct}`;
-  }
-
-  setTimeout(() => {
-    currentQ++;
-    if (currentQ < getQuizData().length) {
-      loadQuestion(currentQ);
-    } else {
-      showScore();
-    }
-  }, 1600);
-}
-
-function showScore() {
-  if (quizBody)  quizBody.style.display  = 'none';
-  if (quizResult) quizResult.classList.add('hidden');
-  if (quizScore) quizScore.classList.remove('hidden');
-  if (quizProgress) quizProgress.style.width = '100%';
-  const qd = getQuizData();
-  if (quizLabel)    quizLabel.textContent = `${qd.length} / ${qd.length}`;
-
-  const xp = score * 20;
-  const pct = Math.round((score / qd.length) * 100);
-
-  if (scoreEmoji) {
-    scoreEmoji.textContent = pct === 100 ? '🏆' : pct >= 60 ? '⭐' : '💪';
-  }
-  if (scoreText) {
-    const correct_label = currentLang === 'ru' ? 'правильно' : 'correct';
-    scoreText.textContent = `${score} / ${qd.length} ${correct_label} (${pct}%)`;
-  }
-  if (scoreXP) {
-    animateCounter(scoreXP, xp, '', 800);
-  }
-}
-
-function restartQuiz() {
-  currentQ = 0;
-  score    = 0;
-  if (quizBody)  quizBody.style.display  = '';
-  if (quizScore) quizScore.classList.add('hidden');
-  loadQuestion(0);
-}
-
-quizRestart?.addEventListener('click', restartQuiz);
-
-// Init quiz when it scrolls into view
-const quizCard = document.getElementById('quizCard');
-if (quizCard) {
-  let quizStarted = false;
-  new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !quizStarted) {
-      quizStarted = true;
-      loadQuestion(0);
-    }
-  }, { threshold: 0.3 }).observe(quizCard);
-}
-
-
-/* ============================================================
-   10. SMOOTH SCROLL (offset for fixed header)
-   ============================================================ */
-
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const target = document.querySelector(id);
-    if (!target) return;
-    e.preventDefault();
-    closeMenu();
-    const offset = (header?.offsetHeight || 72) + 12;
-    window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
-  });
-});
-
-
-/* ============================================================
-   11. ACTIVE NAV HIGHLIGHT
-   ============================================================ */
-
-const sections  = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
-
-new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    navAnchors.forEach(a => {
-      a.style.color = a.getAttribute('href') === `#${e.target.id}`
-        ? 'var(--primary)'
-        : '';
-    });
-  });
-}, { rootMargin: '-40% 0px -55% 0px' }).observe;
-
-// simpler approach
-new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    navAnchors.forEach(a =>
-      a.style.color = a.getAttribute('href') === `#${e.target.id}` ? 'var(--text)' : ''
-    );
-  });
-}, { rootMargin: '-35% 0px -60% 0px' })
-  ; sections.forEach(s => {
-  new IntersectionObserver(([e]) => {
-    if (!e.isIntersecting) return;
-    navAnchors.forEach(a =>
-      a.style.color = a.getAttribute('href') === `#${e.target.id}` ? 'var(--primary)' : ''
-    );
-  }, { rootMargin: '-35% 0px -60% 0px' }).observe(s);
-
-
-/* ============================================================
-   12. LESSON TREE
-   ============================================================ */
-const treeLessons = {
-  1: { titleEN: 'Greetings',     titleRU: 'Приветствия',   done: true,  questions: [] },
-  2: { titleEN: 'Numbers',       titleRU: 'Числа',          done: false,
-    questions: [
-      { word: 'Бир',  opt_en: ['One','Two','Three','Four'],    cor_en: 'One',   opt_ru: ['Один','Два','Три','Четыре'],     cor_ru: 'Один'  },
-      { word: 'Эки',  opt_en: ['One','Two','Three','Four'],    cor_en: 'Two',   opt_ru: ['Один','Два','Три','Четыре'],     cor_ru: 'Два'   },
-      { word: 'Үч',   opt_en: ['One','Two','Three','Four'],    cor_en: 'Three', opt_ru: ['Один','Два','Три','Четыре'],     cor_ru: 'Три'   },
-    ]
-  },
-  3: { titleEN: 'Colors',        titleRU: 'Цвета',          done: false,
-    questions: [
-      { word: 'Кызыл', opt_en: ['Red','Blue','Green','White'],  cor_en: 'Red',   opt_ru: ['Красный','Синий','Зелёный','Белый'], cor_ru: 'Красный' },
-      { word: 'Ак',    opt_en: ['Red','Blue','Green','White'],  cor_en: 'White', opt_ru: ['Красный','Синий','Зелёный','Белый'], cor_ru: 'Белый'   },
-      { word: 'Жашыл', opt_en: ['Red','Blue','Green','White'],  cor_en: 'Green', opt_ru: ['Красный','Синий','Зелёный','Белый'], cor_ru: 'Зелёный' },
-    ]
-  },
-  4: { titleEN: 'Family',        titleRU: 'Семья',          done: false,
-    questions: [
-      { word: 'Апа', opt_en: ['Mother','Father','Sister','Brother'], cor_en: 'Mother', opt_ru: ['Мама','Папа','Сестра','Брат'], cor_ru: 'Мама'   },
-      { word: 'Ата', opt_en: ['Mother','Father','Sister','Brother'], cor_en: 'Father', opt_ru: ['Мама','Папа','Сестра','Брат'], cor_ru: 'Папа'   },
-      { word: 'Эже', opt_en: ['Mother','Father','Sister','Brother'], cor_en: 'Sister', opt_ru: ['Мама','Папа','Сестра','Брат'], cor_ru: 'Сестра' },
-    ]
-  },
-  5: { titleEN: 'Food & Drinks', titleRU: 'Еда и напитки', done: false,
-    questions: [
-      { word: 'Нан', opt_en: ['Bread','Water','Milk','Meat'], cor_en: 'Bread', opt_ru: ['Хлеб','Вода','Молоко','Мясо'], cor_ru: 'Хлеб' },
-      { word: 'Суу', opt_en: ['Bread','Water','Milk','Meat'], cor_en: 'Water', opt_ru: ['Хлеб','Вода','Молоко','Мясо'], cor_ru: 'Вода' },
-      { word: 'Эт',  opt_en: ['Bread','Water','Milk','Meat'], cor_en: 'Meat',  opt_ru: ['Хлеб','Вода','Молоко','Мясо'], cor_ru: 'Мясо' },
-    ]
-  },
+ 
+// ═══════════════════════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════════════════════
+const QUIZ_DATA = {
+  en: [
+    { word: 'Саламатсызбы?', options: ['How are you?','Good morning','Thank you','Goodbye'], answer: 0 },
+    { word: 'Рахмат', options: ['Hello','Thank you','Please','Sorry'], answer: 1 },
+    { word: 'Жакшы', options: ['Bad','Good','Fast','Slow'], answer: 1 },
+    { word: 'Суу', options: ['Fire','Earth','Water','Air'], answer: 2 },
+    { word: 'Мен', options: ['You','He/She','We','I'], answer: 3 },
+  ],
+  ru: [
+    { word: 'Саламатсызбы?', options: ['Как дела?','Доброе утро','Спасибо','До свидания'], answer: 0 },
+    { word: 'Рахмат', options: ['Привет','Спасибо','Пожалуйста','Извините'], answer: 1 },
+    { word: 'Жакшы', options: ['Плохо','Хорошо','Быстро','Медленно'], answer: 1 },
+    { word: 'Суу', options: ['Огонь','Земля','Вода','Воздух'], answer: 2 },
+    { word: 'Мен', options: ['Ты','Он/Она','Мы','Я'], answer: 3 },
+  ]
 };
-
-let treeLevel = 0, treeLessonQ = 0, treeLessonScore = 0;
-
-document.querySelectorAll('.tree-node').forEach(node => {
-  function openOnEvent() {
-    if (node.classList.contains('tree-node--locked')) {
-      showLockedLessonHint(parseInt(node.dataset.level, 10));
-      return;
-    }
-    openLesson(parseInt(node.dataset.level, 10));
-  }
-  node.addEventListener('click', openOnEvent);
-  node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openOnEvent(); } });
-});
-
-function showLockedLessonHint(level) {
-  const panel = document.getElementById('lessonPanel');
-  const title = document.getElementById('lessonTitle');
-  const body = document.getElementById('lessonBody');
-  if (!panel || !title || !body) return;
-  const isRU = currentLang === 'ru';
-  const needLevel = Math.max(1, level - 1);
-  title.textContent = isRU ? 'Урок пока закрыт' : 'Lesson is locked';
-  body.innerHTML = `
-    <div class="lesson-complete">
-      <div class="lesson-complete__emoji">🔒</div>
-      <h3 class="lesson-complete__title">${isRU ? 'Сначала пройди предыдущий уровень' : 'Complete the previous level first'}</h3>
-      <p style="color:var(--muted)">${isRU ? `Открой уровень ${needLevel}, затем этот урок станет активным.` : `Finish level ${needLevel}, then this lesson will unlock.`}</p>
-      <p class="lesson-panel__note">${isRU ? 'Подсказка: активный уровень пульсирует красным.' : 'Tip: the active level has a red pulse.'}</p>
-      <button class="btn btn--primary btn--sm" id="lockedOk">${isRU ? 'Понятно' : 'Got it'}</button>
-    </div>`;
-  panel.classList.remove('hidden');
-  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  document.getElementById('lockedOk')?.addEventListener('click', () => panel.classList.add('hidden'));
+ 
+let quizState = { q: 0, score: 0, answered: false };
+ 
+function initQuiz() {
+  quizState = { q: 0, score: 0, answered: false };
+  document.getElementById('quizScore')?.classList.add('hidden');
+  document.getElementById('quizBody')?.classList.remove('hidden');
+  renderQuestion();
 }
-
+ 
+function renderQuestion() {
+  const data = QUIZ_DATA[currentLang];
+  const q = data[quizState.q];
+  const total = data.length;
+  document.getElementById('quizProgress').style.width = (quizState.q / total * 100) + '%';
+  document.getElementById('quizLabel').textContent = `${quizState.q + 1} / ${total}`;
+  document.getElementById('quizWord').textContent = q.word;
+  document.getElementById('quizResult').classList.add('hidden');
+  const opts = document.getElementById('quizOptions');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const li = document.createElement('li');
+    li.className = 'quiz-option';
+    li.textContent = opt;
+    li.tabIndex = 0;
+    li.setAttribute('role', 'button');
+    li.addEventListener('click', () => handleAnswer(i, q.answer));
+    li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') handleAnswer(i, q.answer); });
+    opts.appendChild(li);
+  });
+  quizState.answered = false;
+}
+ 
+function handleAnswer(chosen, correct) {
+  if (quizState.answered) return;
+  quizState.answered = true;
+  document.querySelectorAll('.quiz-option').forEach((opt, i) => {
+    opt.style.pointerEvents = 'none';
+    if (i === correct) opt.classList.add('quiz-option--correct');
+    else if (i === chosen) opt.classList.add('quiz-option--wrong');
+  });
+  if (chosen === correct) quizState.score++;
+  const resultEl = document.getElementById('quizResult');
+  resultEl.classList.remove('hidden');
+  document.getElementById('quizResultIcon').textContent = chosen === correct ? '✅' : '❌';
+  const correctText = QUIZ_DATA[currentLang][quizState.q].options[correct];
+  document.getElementById('quizResultText').textContent = chosen === correct
+    ? (currentLang === 'en' ? 'Correct! Well done.' : 'Правильно! Отлично.')
+    : (currentLang === 'en' ? `Wrong. Correct: "${correctText}"` : `Неверно. Правильно: "${correctText}"`);
+  setTimeout(() => {
+    quizState.q++;
+    if (quizState.q >= QUIZ_DATA[currentLang].length) showQuizScore();
+    else renderQuestion();
+  }, 1400);
+}
+ 
+function showQuizScore() {
+  document.getElementById('quizBody').classList.add('hidden');
+  document.getElementById('quizResult').classList.add('hidden');
+  const score = quizState.score, total = QUIZ_DATA[currentLang].length;
+  document.getElementById('scoreEmoji').textContent = score === total ? '🏆' : score >= 3 ? '⭐' : '💪';
+  document.getElementById('scoreText').textContent = currentLang === 'en'
+    ? `You got ${score} out of ${total} correct!` : `Правильных: ${score} из ${total}!`;
+  document.getElementById('scoreXP').textContent = score * 20;
+  document.getElementById('quizScore').classList.remove('hidden');
+  document.getElementById('quizProgress').style.width = '100%';
+  document.getElementById('quizLabel').textContent = `${total} / ${total}`;
+}
+document.getElementById('quizRestart')?.addEventListener('click', initQuiz);
+ 
+// ═══════════════════════════════════════════════════════════
+// LESSON TREE
+// ═══════════════════════════════════════════════════════════
+const LESSON_CONTENT = {
+  1: {
+    en: { title: 'Greetings', items: [
+      {kg:'Салам',tr:'Hello (informal)'},{kg:'Саламатсызбы?',tr:'How are you? (formal)'},
+      {kg:'Кандайсыз?',tr:'How are you?'},{kg:'Жакшымын, рахмат',tr:"I'm fine, thank you"},
+      {kg:'Кош болуңуз',tr:'Goodbye (formal)'},{kg:'Жакшы бол',tr:'Goodbye (informal)'},
+    ]},
+    ru: { title: 'Приветствия', items: [
+      {kg:'Салам',tr:'Привет (неформально)'},{kg:'Саламатсызбы?',tr:'Как дела? (формально)'},
+      {kg:'Кандайсыз?',tr:'Как вы?'},{kg:'Жакшымын, рахмат',tr:'Я в порядке, спасибо'},
+      {kg:'Кош болуңуз',tr:'До свидания (формально)'},{kg:'Жакшы бол',tr:'Пока (неформально)'},
+    ]}
+  },
+  2: {
+    en: { title: 'Numbers', items: [
+      {kg:'Бир',tr:'One (1)'},{kg:'Эки',tr:'Two (2)'},{kg:'Үч',tr:'Three (3)'},
+      {kg:'Төрт',tr:'Four (4)'},{kg:'Беш',tr:'Five (5)'},{kg:'Алты',tr:'Six (6)'},
+      {kg:'Жети',tr:'Seven (7)'},{kg:'Сегиз',tr:'Eight (8)'},{kg:'Тогуз',tr:'Nine (9)'},{kg:'Он',tr:'Ten (10)'},
+    ]},
+    ru: { title: 'Числа', items: [
+      {kg:'Бир',tr:'Один (1)'},{kg:'Эки',tr:'Два (2)'},{kg:'Үч',tr:'Три (3)'},
+      {kg:'Төрт',tr:'Четыре (4)'},{kg:'Беш',tr:'Пять (5)'},{kg:'Алты',tr:'Шесть (6)'},
+      {kg:'Жети',tr:'Семь (7)'},{kg:'Сегиз',tr:'Восемь (8)'},{kg:'Тогуз',tr:'Девять (9)'},{kg:'Он',tr:'Десять (10)'},
+    ]}
+  }
+};
+ 
+function initLessonTree() {
+  document.querySelectorAll('.tree-node:not(.tree-node--locked)').forEach(node => {
+    node.addEventListener('click', () => openLesson(+node.dataset.level));
+    node.addEventListener('keydown', e => { if (e.key === 'Enter') openLesson(+node.dataset.level); });
+  });
+  document.getElementById('lessonClose')?.addEventListener('click', () => {
+    document.getElementById('lessonPanel').classList.add('hidden');
+  });
+}
+ 
 function openLesson(level) {
-  const lesson = treeLessons[level];
-  if (!lesson) return;
-  treeLevel = level; treeLessonQ = 0; treeLessonScore = 0;
   const panel = document.getElementById('lessonPanel');
-  const title = document.getElementById('lessonTitle');
-  if (!panel || !title) return;
-  title.textContent = currentLang === 'ru' ? lesson.titleRU : lesson.titleEN;
+  const content = LESSON_CONTENT[level];
+  if (!content) return;
+  const lang = currentLang === 'ru' ? 'ru' : 'en';
+  const data = content[lang];
+  document.getElementById('lessonTitle').textContent = data.title;
+  document.getElementById('lessonBody').innerHTML = data.items.map((item, i) => `
+    <div class="lesson-item" style="animation-delay:${i*50}ms">
+      <span class="lesson-item__kg">${item.kg}</span>
+      <span class="lesson-item__tr">${item.tr}</span>
+      <button class="lesson-item__play" onclick="speakKyrgyz('${item.kg.replace(/'/g,"\\'")}')">🔊</button>
+    </div>
+  `).join('');
   panel.classList.remove('hidden');
-  if (lesson.done) {
-    showLessonComplete(level, 3, 3);
-  } else {
-    renderLessonQ(lesson);
-  }
   panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
-
-function renderLessonQ(lesson) {
-  const body = document.getElementById('lessonBody');
-  if (!body) return;
-  const q = lesson.questions[treeLessonQ];
-  const isRU = currentLang === 'ru';
-  const opts = isRU ? q.opt_ru : q.opt_en;
-  const cor  = isRU ? q.cor_ru  : q.cor_en;
-  const total = lesson.questions.length;
-  const prompt = isRU ? 'Выбери правильный перевод:' : 'Choose the correct translation:';
-  body.innerHTML = `
-    <div class="lesson-q">
-      <p class="lesson-q__step">${treeLessonQ + 1} / ${total}</p>
-      <p class="lesson-q__word">${q.word}</p>
-      <p class="lesson-q__prompt">${prompt}</p>
-      <div class="lesson-q__options">
-        ${opts.map(o => `<button class="lesson-q__opt" data-cor="${o === cor}">${o}</button>`).join('')}
-      </div>
-    </div>`;
-  body.querySelectorAll('.lesson-q__opt').forEach(btn => {
+ 
+// ═══════════════════════════════════════════════════════════
+// FLASHCARDS — improved with categories
+// ═══════════════════════════════════════════════════════════
+const FLASHCARDS = [
+  {emoji:'👋',kg:'Салам',en:'Hello',ru:'Привет',ex_en:'Салам! Кандайсыз? — Hello! How are you?',ex_ru:'Салам! Кандайсыз? — Привет! Как дела?'},
+  {emoji:'🙏',kg:'Рахмат',en:'Thank you',ru:'Спасибо',ex_en:'Чоң рахмат! — Thank you very much!',ex_ru:'Чоң рахмат! — Большое спасибо!'},
+  {emoji:'🌊',kg:'Суу',en:'Water',ru:'Вода',ex_en:'Суу ичейин — I will drink water',ex_ru:'Суу ичейин — Я выпью воды'},
+  {emoji:'🏠',kg:'Үй',en:'House / Home',ru:'Дом',ex_en:'Менин үйүм — My home',ex_ru:'Менин үйүм — Мой дом'},
+  {emoji:'🍎',kg:'Алма',en:'Apple',ru:'Яблоко',ex_en:'Кызыл алма — Red apple',ex_ru:'Кызыл алма — Красное яблоко'},
+  {emoji:'☀️',kg:'Күн',en:'Sun / Day',ru:'Солнце / День',ex_en:'Жакшы күн! — Good day!',ex_ru:'Жакшы күн! — Хороший день!'},
+  {emoji:'🌙',kg:'Ай',en:'Moon / Month',ru:'Луна / Месяц',ex_en:'Толгон ай — Full moon',ex_ru:'Толгон ай — Полная луна'},
+  {emoji:'❤️',kg:'Жүрөк',en:'Heart',ru:'Сердце',ex_en:'Жүрөк согот — Heart beats',ex_ru:'Жүрөк согот — Сердце бьётся'},
+  {emoji:'📚',kg:'Китеп',en:'Book',ru:'Книга',ex_en:'Китеп окуйм — I read a book',ex_ru:'Китеп окуйм — Я читаю книгу'},
+  {emoji:'🐴',kg:'Жылкы',en:'Horse',ru:'Лошадь',ex_en:'Кыргыз жылкысы — Kyrgyz horse',ex_ru:'Кыргыз жылкысы — Кыргызская лошадь'},
+  {emoji:'🏔️',kg:'Тоо',en:'Mountain',ru:'Гора',ex_en:'Бийик тоо — High mountain',ex_ru:'Бийик тоо — Высокая гора'},
+  {emoji:'👁️',kg:'Көз',en:'Eye',ru:'Глаз',ex_en:'Кара көз — Dark eyes',ex_ru:'Кара көз — Тёмные глаза'},
+];
+ 
+let fcIndex = 0, fcKnown = new Set(), fcFlipped = false;
+let fcCategory = 'all', fcFiltered = [...FLASHCARDS];
+ 
+function initFlashcards() {
+  injectFCFilterBar();
+  renderFC();
+  document.getElementById('flashcard')?.addEventListener('click', flipCard);
+  document.getElementById('flashcard')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') flipCard();
+    if (e.key === 'ArrowRight') fcNextCard();
+    if (e.key === 'ArrowLeft') fcPrevCard();
+  });
+  document.getElementById('fcNext')?.addEventListener('click', fcNextCard);
+  document.getElementById('fcPrev')?.addEventListener('click', fcPrevCard);
+  document.getElementById('fcKnow')?.addEventListener('click', markKnown);
+  document.getElementById('fcRepeat')?.addEventListener('click', markRepeat);
+}
+ 
+function injectFCFilterBar() {
+  if (document.getElementById('fc-filter-bar')) return;
+  const wrap = document.querySelector('.flashcard-wrap');
+  if (!wrap) return;
+  const bar = document.createElement('div');
+  bar.id = 'fc-filter-bar';
+  bar.className = 'fc-filter-bar';
+  bar.innerHTML = `
+    <button class="fc-filter-btn active" data-fc-filter="all">Все / All <span id="fc-count-all">${FLASHCARDS.length}</span></button>
+    <button class="fc-filter-btn" data-fc-filter="review">🟡 Review <span id="fc-count-review">${FLASHCARDS.length}</span></button>
+    <button class="fc-filter-btn" data-fc-filter="known">🟢 Known <span id="fc-count-known">0</span></button>
+  `;
+  wrap.insertBefore(bar, wrap.firstChild);
+  bar.querySelectorAll('.fc-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const ok = btn.dataset.cor === 'true';
-      body.querySelectorAll('.lesson-q__opt').forEach(b => { b.disabled = true; });
-      btn.classList.add(ok ? 'correct' : 'wrong');
-      if (!ok) body.querySelectorAll('.lesson-q__opt').forEach(b => { if (b.dataset.cor === 'true') b.classList.add('correct'); });
-      if (ok) treeLessonScore++;
-      setTimeout(() => { treeLessonQ++; treeLessonQ < total ? renderLessonQ(lesson) : showLessonComplete(treeLevel, treeLessonScore, total); }, 1000);
+      fcCategory = btn.dataset.fcFilter;
+      bar.querySelectorAll('.fc-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      fcFiltered = getFilteredCards();
+      fcIndex = 0;
+      renderFC();
     });
   });
 }
-
-function showLessonComplete(level, sc, total) {
-  const body = document.getElementById('lessonBody');
-  if (!body) return;
-  const lesson = treeLessons[level];
-  const xp = sc * 20;
-  const isRU = currentLang === 'ru';
-  const retryLabel = isRU ? 'Повторить' : 'Try Again';
-  const contLabel  = isRU ? 'Продолжить' : 'Continue';
-  const title      = isRU ? 'Урок завершён!' : 'Lesson Complete!';
-  body.innerHTML = `
-    <div class="lesson-complete">
-      <div class="lesson-complete__emoji">${sc === total ? '🏆' : sc >= total / 2 ? '⭐' : '💪'}</div>
-      <h3 class="lesson-complete__title">${title}</h3>
-      <p style="color:var(--muted);margin-bottom:.6rem">${sc} / ${total}</p>
-      <div class="lesson-complete__xp">+${xp} XP</div>
-      ${!lesson.done ? `<button class="btn btn--outline btn--sm" id="treeRetry">${retryLabel}</button>&nbsp;` : ''}
-      <button class="btn btn--primary btn--sm" id="treeCont">${contLabel}</button>
-    </div>`;
-  document.getElementById('treeRetry')?.addEventListener('click', () => { treeLessonQ = 0; treeLessonScore = 0; renderLessonQ(lesson); });
-  document.getElementById('treeCont')?.addEventListener('click', () => { document.getElementById('lessonPanel')?.classList.add('hidden'); });
+ 
+function getFilteredCards() {
+  if (fcCategory === 'known') return FLASHCARDS.filter((_, i) => fcKnown.has(i));
+  if (fcCategory === 'review') return FLASHCARDS.filter((_, i) => !fcKnown.has(i));
+  return [...FLASHCARDS];
 }
-document.getElementById('lessonClose')?.addEventListener('click', () => { document.getElementById('lessonPanel')?.classList.add('hidden'); });
-
-
-/* ============================================================
-   13. FLASHCARDS
-   ============================================================ */
-const flashcardsData = [
-  { emoji: '👋', word: 'Саламатсызбы?', en: 'How are you?',       ru: 'Как дела?',             ex_en: 'Formal daily greeting',             ex_ru: 'Формальное приветствие'      },
-  { emoji: '🙏', word: 'Рахмат',        en: 'Thank you',           ru: 'Спасибо',               ex_en: 'Рахмат! — Thank you!',              ex_ru: 'Рахмат! — Спасибо!'          },
-  { emoji: '😊', word: 'Жакшы',         en: 'Good / Fine',         ru: 'Хорошо / Нормально',   ex_en: 'Мен жакшымын — I am fine',          ex_ru: 'Мен жакшымын — Всё хорошо'  },
-  { emoji: '1️⃣', word: 'Бир',           en: 'One',                 ru: 'Один',                  ex_en: 'Бир чыны чай — one cup of tea',     ex_ru: 'Бир чыны чай — одна чашка'  },
-  { emoji: '2️⃣', word: 'Эки',           en: 'Two',                 ru: 'Два',                   ex_en: 'Эки адам — two people',             ex_ru: 'Эки адам — два человека'    },
-  { emoji: '🔴', word: 'Кызыл',         en: 'Red',                 ru: 'Красный',               ex_en: 'Кызыл гүл — red flower',            ex_ru: 'Кызыл гүл — красный цветок' },
-  { emoji: '⬜', word: 'Ак',            en: 'White',               ru: 'Белый',                 ex_en: 'Ак кар — white snow',               ex_ru: 'Ак кар — белый снег'         },
-  { emoji: '👩', word: 'Апа',           en: 'Mother',              ru: 'Мама',                  ex_en: 'Менин апам — my mother',            ex_ru: 'Менин апам — моя мама'       },
-  { emoji: '🍞', word: 'Нан',           en: 'Bread',               ru: 'Хлеб',                  ex_en: 'Нан жедим — I ate bread',           ex_ru: 'Нан жедим — я съел хлеб'    },
-  { emoji: '💧', word: 'Суу',           en: 'Water',               ru: 'Вода',                  ex_en: 'Суу ичтим — I drank water',         ex_ru: 'Суу ичтим — я выпил воду'   },
-];
-
-let fcIndex = 0;
-const fcKnown = new Set();
-const flashcardEl   = document.getElementById('flashcard');
-const fcEmojiEl     = document.getElementById('fcEmoji');
-const fcWordEl      = document.getElementById('fcWord');
-const fcTransEl     = document.getElementById('fcTranslation');
-const fcExEl        = document.getElementById('fcExample');
-const fcCounterEl   = document.getElementById('fcCounter');
-const fcKnownCntEl  = document.getElementById('fcKnownCount');
-const fcRevCntEl    = document.getElementById('fcReviewCount');
-
-function renderFlashcard(idx) {
-  const c = flashcardsData[idx];
-  if (!c) return;
-  flashcardEl?.classList.remove('flipped');
-  setTimeout(() => {
-    if (fcEmojiEl)   fcEmojiEl.textContent   = c.emoji;
-    if (fcWordEl)    fcWordEl.textContent     = c.word;
-    if (fcTransEl)   fcTransEl.textContent   = currentLang === 'ru' ? c.ru : c.en;
-    if (fcExEl)      fcExEl.textContent      = currentLang === 'ru' ? c.ex_ru : c.ex_en;
-    if (fcCounterEl) fcCounterEl.textContent = `${idx + 1} / ${flashcardsData.length}`;
-    if (fcKnownCntEl) fcKnownCntEl.textContent = fcKnown.size;
-    if (fcRevCntEl)   fcRevCntEl.textContent   = flashcardsData.length - fcKnown.size;
-  }, 150);
+ 
+function renderFC() {
+  if (!fcFiltered.length) {
+    document.getElementById('fcWord').textContent = currentLang === 'ru' ? 'Нет карточек' : 'No cards here';
+    document.getElementById('fcEmoji').textContent = '🎉';
+    document.getElementById('fcCounter').textContent = '0 / 0';
+    return;
+  }
+  const fc = fcFiltered[fcIndex];
+  const origIdx = FLASHCARDS.indexOf(fc);
+  fcFlipped = false;
+  document.getElementById('flashcard')?.classList.remove('flipped');
+  document.getElementById('fcWord').textContent = fc.kg;
+  document.getElementById('fcEmoji').textContent = fc.emoji;
+  document.getElementById('fcTranslation').textContent = currentLang === 'ru' ? fc.ru : fc.en;
+  document.getElementById('fcExample').textContent = currentLang === 'ru' ? fc.ex_ru : fc.ex_en;
+  document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${fcFiltered.length}`;
+  const knowBtn = document.getElementById('fcKnow');
+  const repeatBtn = document.getElementById('fcRepeat');
+  knowBtn?.classList.toggle('fc-active-know', fcKnown.has(origIdx));
+  repeatBtn?.classList.toggle('fc-active-repeat', !fcKnown.has(origIdx));
+  updateFCStats();
 }
-
-flashcardEl?.addEventListener('click', () => flashcardEl.classList.toggle('flipped'));
-flashcardEl?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flashcardEl.classList.toggle('flipped'); } });
-document.getElementById('fcNext')?.addEventListener('click',   () => { fcIndex = (fcIndex + 1) % flashcardsData.length; renderFlashcard(fcIndex); });
-document.getElementById('fcPrev')?.addEventListener('click',   () => { fcIndex = (fcIndex - 1 + flashcardsData.length) % flashcardsData.length; renderFlashcard(fcIndex); });
-document.getElementById('fcKnow')?.addEventListener('click',   () => { fcKnown.add(fcIndex); fcIndex = (fcIndex + 1) % flashcardsData.length; renderFlashcard(fcIndex); });
-document.getElementById('fcRepeat')?.addEventListener('click', () => { fcKnown.delete(fcIndex); fcIndex = (fcIndex + 1) % flashcardsData.length; renderFlashcard(fcIndex); });
-
-const fcSection = document.getElementById('flashcards');
-if (fcSection) {
-  let fcInited = false;
-  new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !fcInited) { fcInited = true; renderFlashcard(0); }
-  }, { threshold: 0.15 }).observe(fcSection);
+ 
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('flashcard')?.classList.toggle('flipped', fcFlipped);
 }
-
-
-/* ============================================================
-   14. AI TABS
-   ============================================================ */
-document.querySelectorAll('.ai-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.ai-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-    tab.classList.add('active'); tab.setAttribute('aria-selected', 'true');
-    const panelId = 'panel' + tab.dataset.tab.charAt(0).toUpperCase() + tab.dataset.tab.slice(1);
-    document.querySelectorAll('.ai-panel').forEach(p => p.classList.add('hidden'));
-    document.getElementById(panelId)?.classList.remove('hidden');
+ 
+function fcNextCard() {
+  fcIndex = (fcIndex + 1) % Math.max(fcFiltered.length, 1);
+  renderFC();
+}
+function fcPrevCard() {
+  fcIndex = (fcIndex - 1 + Math.max(fcFiltered.length, 1)) % Math.max(fcFiltered.length, 1);
+  renderFC();
+}
+ 
+function markKnown() {
+  const fc = fcFiltered[fcIndex];
+  fcKnown.add(FLASHCARDS.indexOf(fc));
+  fcFiltered = getFilteredCards();
+  if (fcIndex >= fcFiltered.length) fcIndex = Math.max(0, fcFiltered.length - 1);
+  const btn = document.getElementById('fcKnow');
+  if (btn) { btn.textContent = '✓✓ Great!'; setTimeout(() => { btn.innerHTML = `✓ <span>${currentLang==='ru'?'Знаю':'Know it'}</span>`; }, 800); }
+  renderFC();
+}
+function markRepeat() {
+  const fc = fcFiltered[fcIndex];
+  fcKnown.delete(FLASHCARDS.indexOf(fc));
+  fcFiltered = getFilteredCards();
+  renderFC();
+}
+ 
+function updateFCStats() {
+  const k = fcKnown.size, r = FLASHCARDS.length - k;
+  document.getElementById('fcKnownCount').textContent = k;
+  document.getElementById('fcReviewCount').textContent = r;
+  if (document.getElementById('fc-count-all')) document.getElementById('fc-count-all').textContent = FLASHCARDS.length;
+  if (document.getElementById('fc-count-known')) document.getElementById('fc-count-known').textContent = k;
+  if (document.getElementById('fc-count-review')) document.getElementById('fc-count-review').textContent = r;
+}
+ 
+// ═══════════════════════════════════════════════════════════
+// AI TABS
+// ═══════════════════════════════════════════════════════════
+function initAITabs() {
+  document.querySelectorAll('.ai-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.ai-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('.ai-panel').forEach(p => p.classList.add('hidden'));
+      const id = 'panel' + tab.dataset.tab[0].toUpperCase() + tab.dataset.tab.slice(1);
+      document.getElementById(id)?.classList.remove('hidden');
+    });
   });
-});
-
-
-/* ============================================================
-   15. VOICE TUTOR
-   ============================================================ */
-const tutorPhrases = [
-  { kyrgyz: 'Саламатсызбы?', en: 'How are you?',        ru: 'Как дела?'           },
-  { kyrgyz: 'Мен жакшымын',  en: 'I am fine',           ru: 'Я в порядке'         },
-  { kyrgyz: 'Атыңыз ким?',   en: 'What is your name?',  ru: 'Как вас зовут?'      },
-  { kyrgyz: 'Менин атым...',  en: 'My name is...',       ru: 'Меня зовут...'       },
-  { kyrgyz: 'Рахмат',        en: 'Thank you',            ru: 'Спасибо'             },
-  { kyrgyz: 'Кечиресиз',     en: 'Excuse me',            ru: 'Извините'            },
-  { kyrgyz: 'Жакшы бол',     en: 'Goodbye',              ru: 'До свидания'         },
-  { kyrgyz: 'Ооба',          en: 'Yes',                  ru: 'Да'                  },
-  { kyrgyz: 'Жок',           en: 'No',                   ru: 'Нет'                 },
-  { kyrgyz: 'Кош келиңиз',   en: 'Welcome',              ru: 'Добро пожаловать'    },
-];
-
-let tutorIndex = 0;
-let tutorRecognizer = null;
-
-function renderTutorPhrase(idx) {
-  const p = tutorPhrases[idx];
-  const phraseEl = document.getElementById('tutorPhrase');
-  const transEl  = document.getElementById('tutorTrans');
-  const labelEl  = document.getElementById('tutorRecordLabel');
-  if (phraseEl) phraseEl.textContent = p.kyrgyz;
-  if (transEl)  transEl.textContent  = currentLang === 'ru' ? p.ru : p.en;
-  if (labelEl)  labelEl.textContent  = currentLang === 'ru' ? 'Нажмите, чтобы говорить' : 'Tap to Speak';
-  const fb = document.getElementById('tutorFeedback');
-  if (fb) { fb.classList.add('hidden'); fb.textContent = ''; }
 }
-
-document.getElementById('tutorPrev')?.addEventListener('click', () => { tutorIndex = (tutorIndex - 1 + tutorPhrases.length) % tutorPhrases.length; renderTutorPhrase(tutorIndex); });
-document.getElementById('tutorNext')?.addEventListener('click', () => { tutorIndex = (tutorIndex + 1) % tutorPhrases.length; renderTutorPhrase(tutorIndex); });
-
-document.getElementById('tutorListen')?.addEventListener('click', () => {
+ 
+// ═══════════════════════════════════════════════════════════
+// SPEECH SYNTHESIS
+// ═══════════════════════════════════════════════════════════
+function speakKyrgyz(text) {
   if (!('speechSynthesis' in window)) return;
-  const utt = new SpeechSynthesisUtterance(tutorPhrases[tutorIndex].kyrgyz);
-  utt.lang = 'ru-RU'; utt.rate = 0.8;
-  speechSynthesis.cancel(); speechSynthesis.speak(utt);
-});
-
-document.querySelector('.tutor__phrase-box')?.addEventListener('click', e => {
-  if (e.target.closest('#tutorListen')) return;
-  document.getElementById('tutorListen')?.click();
-});
-
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const tutorRecordBtn   = document.getElementById('tutorRecord');
-const tutorFeedbackEl  = document.getElementById('tutorFeedback');
-
-tutorRecordBtn?.addEventListener('click', () => {
-  if (!SpeechRecognition) {
-    showTutorFeedback('try', currentLang === 'ru' ? '🎤 Используйте Chrome для распознавания речи.' : '🎤 Use Chrome for speech recognition.');
-    return;
-  }
-  if (tutorRecognizer) { tutorRecognizer.stop(); return; }
-  tutorRecordBtn.classList.add('recording');
-  document.getElementById('tutorRecordLabel').textContent = currentLang === 'ru' ? 'Слушаю...' : 'Listening...';
-  tutorRecognizer = new SpeechRecognition();
-  tutorRecognizer.lang = 'ru-RU'; tutorRecognizer.interimResults = false; tutorRecognizer.maxAlternatives = 5;
-  tutorRecognizer.onresult = e => {
-    const spoken   = e.results[0][0].transcript.toLowerCase().trim();
-    const expected = tutorPhrases[tutorIndex].kyrgyz.toLowerCase();
-    const common   = [...expected].filter(c => spoken.includes(c)).length;
-    const ratio    = common / expected.length;
-    if (ratio >= 0.7)      showTutorFeedback('correct', currentLang === 'ru' ? '🎉 Отлично! Произношение хорошее!' : '🎉 Excellent! Great pronunciation!');
-    else if (ratio >= 0.4) showTutorFeedback('try',     (currentLang === 'ru' ? '👍 Почти! Попробуй ещё: ' : '👍 Almost! Try again: ') + `"${tutorPhrases[tutorIndex].kyrgyz}"`);
-    else                   showTutorFeedback('wrong',   (currentLang === 'ru' ? '🔄 Скажи: ' : '🔄 Try to say: ') + `"${tutorPhrases[tutorIndex].kyrgyz}"`);
-  };
-  tutorRecognizer.onerror = () => { showTutorFeedback('try', currentLang === 'ru' ? '🎤 Не удалось распознать. Попробуй снова.' : '🎤 Could not hear. Please try again.'); resetTutor(); };
-  tutorRecognizer.onend   = () => resetTutor();
-  tutorRecognizer.start();
-});
-
-document.querySelector('.tutor__record-area')?.addEventListener('click', e => {
-  if (e.target.closest('#tutorRecord')) return;
-  tutorRecordBtn?.click();
-});
-
-function showTutorFeedback(type, msg) {
-  if (!tutorFeedbackEl) return;
-  tutorFeedbackEl.className = `tutor__feedback tutor__feedback--${type}`;
-  tutorFeedbackEl.textContent = msg;
-  tutorFeedbackEl.classList.remove('hidden');
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'ky-KG'; utt.rate = 0.85;
+  window.speechSynthesis.speak(utt);
 }
-function resetTutor() {
-  tutorRecognizer = null;
-  tutorRecordBtn?.classList.remove('recording');
-  const lbl = document.getElementById('tutorRecordLabel');
-  if (lbl) lbl.textContent = currentLang === 'ru' ? 'Нажмите, чтобы говорить' : 'Tap to Speak';
-}
-
-renderTutorPhrase(0);
-
-
-/* ============================================================
-   16. PHOTO TRANSLATOR
-   ============================================================ */
-const fakePhotoSets = [
-  [{ ky: 'Дарак', en: 'Tree',   ru: 'Дерево' }, { ky: 'Асман', en: 'Sky',    ru: 'Небо'    }, { ky: 'Жол',    en: 'Road',   ru: 'Дорога'  }],
-  [{ ky: 'Үй',    en: 'House',  ru: 'Дом'    }, { ky: 'Эшик',  en: 'Door',   ru: 'Дверь'   }, { ky: 'Терезе', en: 'Window', ru: 'Окно'    }],
-  [{ ky: 'Адам',  en: 'Person', ru: 'Человек'}, { ky: 'Кол',   en: 'Hand',   ru: 'Рука'    }, { ky: 'Баш',    en: 'Head',   ru: 'Голова'  }],
-  [{ ky: 'Суу',   en: 'Water',  ru: 'Вода'   }, { ky: 'Таш',   en: 'Stone',  ru: 'Камень'  }, { ky: 'Чөп',    en: 'Grass',  ru: 'Трава'   }],
-  [{ ky: 'Машина',en: 'Car',    ru: 'Машина' }, { ky: 'Жол',   en: 'Road',   ru: 'Дорога'  }, { ky: 'Нур',    en: 'Light',  ru: 'Свет'    }],
+ 
+// ═══════════════════════════════════════════════════════════
+// VOICE TUTOR
+// ═══════════════════════════════════════════════════════════
+const TUTOR_PHRASES = [
+  {kg:'Саламатсызбы?',en:'How are you?',ru:'Как дела?'},
+  {kg:'Менин атым...',en:'My name is...',ru:'Меня зовут...'},
+  {kg:'Жакшымын, рахмат',en:"I'm fine, thank you",ru:'Я в порядке, спасибо'},
+  {kg:'Кечиресиз',en:'Excuse me / Sorry',ru:'Извините / Простите'},
+  {kg:'Ооба / Жок',en:'Yes / No',ru:'Да / Нет'},
 ];
-
-const photoInputEl    = document.getElementById('photoInput');
-const photoDropZoneEl = document.getElementById('photoDropZone');
-const photoResultEl   = document.getElementById('photoResult');
-const photoPreviewEl  = document.getElementById('photoPreview');
-const photoLabelsEl   = document.getElementById('photoLabels');
-const photoClearEl    = document.getElementById('photoClear');
-
-photoInputEl?.addEventListener('change', e => { if (e.target.files[0]) processPhoto(e.target.files[0]); });
-photoDropZoneEl?.addEventListener('dragover', e => { e.preventDefault(); photoDropZoneEl.classList.add('drag-over'); });
-photoDropZoneEl?.addEventListener('dragleave', () => photoDropZoneEl.classList.remove('drag-over'));
-photoDropZoneEl?.addEventListener('drop', e => {
-  e.preventDefault(); photoDropZoneEl.classList.remove('drag-over');
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) processPhoto(f);
-});
-photoDropZoneEl?.addEventListener('click', e => { if (e.target !== photoInputEl && !e.target.closest('label')) photoInputEl?.click(); });
-
-function processPhoto(file) {
-  const reader = new FileReader();
-  reader.onload = ev => {
-    if (photoPreviewEl) photoPreviewEl.src = ev.target.result;
-    photoDropZoneEl?.classList.add('hidden');
-    photoResultEl?.classList.remove('hidden');
-    if (photoLabelsEl) photoLabelsEl.innerHTML = `<span style="color:var(--muted);font-size:.88rem">${currentLang === 'ru' ? '🔍 Анализирую изображение...' : '🔍 Analyzing image...'}</span>`;
+let tutorIdx = 0;
+ 
+function initVoiceTutor() {
+  renderTutorPhrase();
+  document.getElementById('tutorListen')?.addEventListener('click', () => speakKyrgyz(TUTOR_PHRASES[tutorIdx].kg));
+  document.getElementById('tutorNext')?.addEventListener('click', () => { tutorIdx = (tutorIdx+1)%TUTOR_PHRASES.length; renderTutorPhrase(); });
+  document.getElementById('tutorPrev')?.addEventListener('click', () => { tutorIdx = (tutorIdx-1+TUTOR_PHRASES.length)%TUTOR_PHRASES.length; renderTutorPhrase(); });
+  initTutorRecord();
+}
+ 
+function renderTutorPhrase() {
+  const p = TUTOR_PHRASES[tutorIdx];
+  document.getElementById('tutorPhrase').textContent = p.kg;
+  document.getElementById('tutorTrans').textContent = currentLang === 'ru' ? p.ru : p.en;
+  document.getElementById('tutorFeedback')?.classList.add('hidden');
+}
+ 
+function initTutorRecord() {
+  const btn = document.getElementById('tutorRecord');
+  const label = document.getElementById('tutorRecordLabel');
+  const feedback = document.getElementById('tutorFeedback');
+  if (!btn) return;
+  let recording = false, recognition = null;
+  if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SR();
+    recognition.lang = 'ky-KG';
+    recognition.onresult = (e) => {
+      const heard = e.results[0][0].transcript;
+      const target = TUTOR_PHRASES[tutorIdx].kg;
+      const match = heard.toLowerCase().includes(target.toLowerCase().slice(0,4));
+      feedback.classList.remove('hidden');
+      feedback.innerHTML = match
+        ? `<span style="color:#22c55e">✅ ${currentLang==='ru'?'Отлично!':'Great!'}</span>`
+        : `<span style="color:#f59e0b">💬 "${heard}"<br><small>${currentLang==='ru'?'Попробуй ещё':'Keep trying!'}</small></span>`;
+      btn.classList.remove('recording'); label.textContent = currentLang==='ru'?'Нажми чтобы говорить':'Tap to Speak'; recording = false;
+    };
+    recognition.onerror = () => { label.textContent = currentLang==='ru'?'Ошибка микрофона':'Mic error'; btn.classList.remove('recording'); recording = false; };
+  }
+  btn.addEventListener('click', () => {
+    if (!recognition) { label.textContent = currentLang==='ru'?'Не поддерживается':'Not supported'; return; }
+    if (!recording) { recognition.start(); recording=true; btn.classList.add('recording'); label.textContent=currentLang==='ru'?'Слушаю...':'Listening...'; }
+    else { recognition.stop(); recording=false; btn.classList.remove('recording'); label.textContent=currentLang==='ru'?'Нажми чтобы говорить':'Tap to Speak'; }
+  });
+}
+ 
+// ═══════════════════════════════════════════════════════════
+// PHOTO TRANSLATOR
+// ═══════════════════════════════════════════════════════════
+const PHOTO_LABELS = [
+  {emoji:'🏠',kg:'Үй',en:'House',ru:'Дом'},{emoji:'🌳',kg:'Дарак',en:'Tree',ru:'Дерево'},
+  {emoji:'🚗',kg:'Машина',en:'Car',ru:'Машина'},{emoji:'☁️',kg:'Булут',en:'Cloud',ru:'Облако'},
+  {emoji:'🐕',kg:'Ит',en:'Dog',ru:'Собака'},{emoji:'🐈',kg:'Мышык',en:'Cat',ru:'Кошка'},
+  {emoji:'📱',kg:'Телефон',en:'Phone',ru:'Телефон'},{emoji:'🍞',kg:'Нан',en:'Bread',ru:'Хлеб'},
+];
+ 
+function initPhotoTranslator() {
+  const dropZone = document.getElementById('photoDropZone');
+  const input = document.getElementById('photoInput');
+  const result = document.getElementById('photoResult');
+  const preview = document.getElementById('photoPreview');
+  const labels = document.getElementById('photoLabels');
+  const clear = document.getElementById('photoClear');
+  if (!dropZone) return;
+ 
+  const handleFile = (file) => {
+    if (!file || !file.type.startsWith('image/')) return;
+    preview.src = URL.createObjectURL(file);
+    dropZone.style.display = 'none'; result.classList.remove('hidden');
+    labels.innerHTML = '<p style="opacity:.6;font-size:14px;margin-bottom:12px">🔍 Analyzing...</p>';
     setTimeout(() => {
-      const set = fakePhotoSets[Math.floor(Math.random() * fakePhotoSets.length)];
-      if (photoLabelsEl) {
-        photoLabelsEl.innerHTML = `<p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem;width:100%">${currentLang === 'ru' ? '🏷️ Обнаруженные объекты:' : '🏷️ Detected objects:'}</p>` +
-          set.map((w, i) => `<div class="photo-label-tag" style="animation-delay:${i * 0.12}s"><span>${w.ky}</span><small>${currentLang === 'ru' ? w.ru : w.en}</small></div>`).join('');
-      }
-    }, 1400);
+      const picked = [...PHOTO_LABELS].sort(() => Math.random()-.5).slice(0,3);
+      labels.innerHTML = picked.map(l => `
+        <div class="photo-label-item">
+          <span class="photo-label-emoji">${l.emoji}</span>
+          <span class="photo-label-kg">${l.kg}</span>
+          <span class="photo-label-tr">${currentLang==='ru'?l.ru:l.en}</span>
+          <button class="photo-label-play" onclick="speakKyrgyz('${l.kg}')">🔊</button>
+        </div>`).join('');
+    }, 1200);
   };
-  reader.readAsDataURL(file);
+ 
+  input.addEventListener('change', () => handleFile(input.files[0]));
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
+  clear?.addEventListener('click', () => { result.classList.add('hidden'); dropZone.style.display=''; input.value=''; });
 }
-
-photoClearEl?.addEventListener('click', () => {
-  photoDropZoneEl?.classList.remove('hidden');
-  photoResultEl?.classList.add('hidden');
-  if (photoInputEl)  photoInputEl.value = '';
-  if (photoLabelsEl) photoLabelsEl.innerHTML = '';
-});
-
-
-/* ============================================================
-   17. VOICE TRANSLATOR
-   ============================================================ */
-const voiceDictEN = {
-  'hello':'Салам','hi':'Салам','how are you':'Саламатсызбы?','good morning':'Кутман таң',
-  'thank you':'Рахмат','thanks':'Рахмат','please':'Сурансам','you are welcome':'Эч нерсе эмес',
-  'yes':'Ооба','no':'Жок','good':'Жакшы','bad':'Жаман','ok':'Макул','fine':'Жакшы',
-  'water':'Суу','food':'Тамак','bread':'Нан','meat':'Эт','milk':'Сүт','tea':'Чай',
-  'one':'Бир','two':'Эки','three':'Үч','four':'Төрт','five':'Беш','ten':'Он',
-  'mother':'Апа','father':'Ата','sister':'Эже','brother':'Байке','family':'Үй-бүлө',
-  'house':'Үй','road':'Жол','sky':'Асман','tree':'Дарак','sun':'Күн','moon':'Ай',
-  'red':'Кызыл','white':'Ак','black':'Кара','blue':'Көк','green':'Жашыл','yellow':'Сары',
-  'i love you':'Мен сени сүйөм','goodbye':'Жакшы бол','excuse me':'Кечиресиз',
-  'sorry':'Кечиресиз','welcome':'Кош келиңиз','where':'Кайда','what':'Эмне','who':'Ким',
+ 
+// ═══════════════════════════════════════════════════════════
+// VOICE TRANSLATOR — full dictionary-based translation
+// ═══════════════════════════════════════════════════════════
+ 
+// English → Kyrgyz: phrases first, then single words
+const DICT_EN = {
+  // Full phrases (checked first)
+  'how are you': 'Кандайсыз?',
+  'how are you doing': 'Кандайсыз?',
+  'good morning': 'Куттуктайм таңыңыз',
+  'good afternoon': 'Куттуктайм күнүңүз',
+  'good evening': 'Куттуктайм кечиңиз',
+  'good night': 'Жакшы жаткыла',
+  'thank you very much': 'Чоң рахмат',
+  'thank you': 'Рахмат',
+  'excuse me': 'Кечиресиз',
+  'i am fine': 'Мен жакшымын',
+  "i'm fine": 'Мен жакшымын',
+  'i am good': 'Мен жакшымын',
+  "i'm good": 'Мен жакшымын',
+  'what is your name': 'Атыңыз ким?',
+  'my name is': 'Менин атым',
+  'nice to meet you': 'Таанышканыма кубандым',
+  'see you later': 'Кийинчерээк көрүшөбүз',
+  'see you': 'Кийинчерээк',
+  'where is': 'Кайда',
+  'where are': 'Кайда',
+  'where is the cave': 'Үңкүр кайда?',
+  'where is the city': 'Шаар кайда?',
+  'where is the market': 'Базар кайда?',
+  'i want to know': 'Мен билгим келет',
+  'i wanna know': 'Мен билгим келет',
+  'i want': 'Мен каалайм',
+  'i wanna': 'Мен каалайм',
+  'i need': 'Мага керек',
+  'how much': 'Канча турат?',
+  'how many': 'Канча?',
+  'do you speak kyrgyz': 'Сиз кыргызча сүйлөйсүзбү?',
+  'i speak kyrgyz': 'Мен кыргызча сүйлөйм',
+  'i don\'t understand': 'Мен түшүнбөдүм',
+  'i do not understand': 'Мен түшүнбөдүм',
+  'can you help me': 'Мага жардам берсеңиз болобу?',
+  'where is the bathroom': 'Дааратхана кайда?',
+  'what time is it': 'Саат нечеде?',
+  'i love you': 'Мен сени жакшы көрөм',
+  'hello everyone': 'Баарыңарга салам',
+  // Words
+  'hello': 'Салам', 'hi': 'Салам', 'hey': 'Эй',
+  'goodbye': 'Кош болуңуз', 'bye': 'Жакшы бол', 'farewell': 'Кош болуңуз',
+  'thanks': 'Рахмат', 'thank': 'Рахмат',
+  'please': 'Сураныч', 'sorry': 'Кечиресиз',
+  'yes': 'Ооба', 'no': 'Жок', 'ok': 'Макул', 'okay': 'Макул',
+  'maybe': 'Балким',
+  // Question words
+  'where': 'Кайда', 'when': 'Качан', 'what': 'Эмне', 'who': 'Ким',
+  'why': 'Эмне үчүн', 'how': 'Кандай', 'which': 'Кайсы',
+  // Pronouns
+  'i': 'Мен', 'you': 'Сен/Сиз', 'he': 'Ал', 'she': 'Ал', 'we': 'Биз',
+  'they': 'Алар', 'me': 'Мени', 'my': 'Менин', 'your': 'Сенин',
+  // Verbs
+  'want': 'каалайм', 'wanna': 'каалайм', 'know': 'билем',
+  'go': 'барам', 'come': 'келем', 'see': 'көрөм', 'eat': 'жейм',
+  'drink': 'ичем', 'sleep': 'уктайм', 'speak': 'сүйлөйм',
+  'listen': 'угам', 'read': 'окуйм', 'write': 'жазам',
+  'help': 'жардам берем', 'love': 'жакшы көрөм', 'like': 'жактырам',
+  'have': 'бар', 'need': 'керек', 'find': 'таап алам',
+  'think': 'ойлойм', 'understand': 'түшүнөм', 'live': 'жашайм',
+  // Places
+  'cave': 'үңкүр', 'house': 'үй', 'home': 'үй', 'school': 'мектеп',
+  'city': 'шаар', 'town': 'шаар', 'village': 'айыл', 'country': 'өлкө',
+  'street': 'көчө', 'road': 'жол', 'market': 'базар', 'shop': 'дүкөн',
+  'hospital': 'оорукана', 'hotel': 'мейманкана', 'airport': 'аэропорт',
+  'station': 'бекет', 'park': 'парк', 'mountain': 'тоо',
+  'river': 'дарыя', 'lake': 'көл', 'sea': 'деңиз',
+  'forest': 'токой', 'field': 'талаа', 'desert': 'чөл',
+  // Food
+  'water': 'суу', 'food': 'тамак', 'bread': 'нан', 'milk': 'сүт',
+  'tea': 'чай', 'coffee': 'кофе', 'meat': 'эт', 'rice': 'күрүч',
+  'apple': 'алма', 'fruit': 'жемиш', 'vegetable': 'жашылча',
+  // Objects
+  'phone': 'телефон', 'book': 'китеп', 'car': 'машина', 'money': 'акча',
+  'bag': 'сумка', 'key': 'ачкыч', 'door': 'эшик', 'window': 'терезе',
+  'table': 'стол', 'chair': 'отургуч', 'bed': 'керебет',
+  // Nature
+  'sun': 'күн', 'moon': 'ай', 'star': 'жылдыз', 'sky': 'асман',
+  'earth': 'жер', 'fire': 'от', 'wind': 'шамал', 'rain': 'жамгыр',
+  'snow': 'кар', 'cloud': 'булут', 'flower': 'гүл', 'tree': 'дарак',
+  // People
+  'mother': 'апа', 'father': 'ата', 'sister': 'эже/сиңди',
+  'brother': 'ага/ини', 'friend': 'дос', 'man': 'эркек',
+  'woman': 'аял', 'child': 'бала', 'boy': 'бала', 'girl': 'кыз',
+  // Colors
+  'red': 'кызыл', 'blue': 'көк', 'green': 'жашыл', 'yellow': 'сары',
+  'black': 'кара', 'white': 'ак', 'orange': 'кызгылт сары',
+  // Numbers
+  'one': 'бир', 'two': 'эки', 'three': 'үч', 'four': 'төрт', 'five': 'беш',
+  'six': 'алты', 'seven': 'жети', 'eight': 'сегиз', 'nine': 'тогуз', 'ten': 'он',
+  'hundred': 'жүз', 'thousand': 'миң',
+  // Adjectives
+  'good': 'жакшы', 'bad': 'жаман', 'big': 'чоң', 'small': 'кичине',
+  'new': 'жаңы', 'old': 'эски', 'fast': 'тез', 'slow': 'жай',
+  'beautiful': 'сулуу', 'hot': 'ысык', 'cold': 'суук', 'happy': 'бактылуу',
+  'sad': 'кайгылуу', 'tired': 'чарчаган', 'hungry': 'ач', 'thirsty': 'суусаган',
+  'important': 'маанилүү', 'interesting': 'кызыктуу', 'difficult': 'кыйын',
+  'easy': 'жеңил', 'right': 'туура', 'wrong': 'туура эмес',
+  // Time
+  'today': 'бүгүн', 'tomorrow': 'эртең', 'yesterday': 'кечээ',
+  'now': 'азыр', 'later': 'кийинчерээк', 'morning': 'эртең менен',
+  'evening': 'кечинде', 'night': 'түн', 'day': 'күн',
+  'week': 'жума', 'month': 'ай', 'year': 'жыл',
+  // Skip words
+  'the': '', 'a': '', 'an': '', 'to': '', 'of': '', 'in': '', 'at': '',
+  'is': '', 'are': '', 'was': '', 'were': '', 'be': '', 'been': '',
+  'and': 'жана', 'or': 'же', 'but': 'бирок', 'so': 'ошондуктан',
+  'not': 'эмес', "don't": 'эмес', "doesn't": 'эмес', "can't": 'болбойт',
+  'it': 'ал', 'this': 'бул', 'that': 'ал',
 };
-const voiceDictRU = {
-  'привет':'Салам','здравствуйте':'Саламатсызбы?','здравствуй':'Саламатсызбы?',
-  'доброе утро':'Кутман таң','как дела':'Саламатсызбы?','хорошо':'Жакшы',
-  'спасибо':'Рахмат','пожалуйста':'Сурансам','не за что':'Эч нерсе эмес',
-  'да':'Ооба','нет':'Жок','плохо':'Жаман','ладно':'Макул',
-  'вода':'Суу','еда':'Тамак','хлеб':'Нан','мясо':'Эт','молоко':'Сүт','чай':'Чай',
-  'один':'Бир','два':'Эки','три':'Үч','четыре':'Төрт','пять':'Беш','десять':'Он',
-  'мама':'Апа','папа':'Ата','сестра':'Эже','брат':'Байке','семья':'Үй-бүлө',
-  'дом':'Үй','дорога':'Жол','небо':'Асман','дерево':'Дарак','солнце':'Күн','луна':'Ай',
-  'красный':'Кызыл','белый':'Ак','чёрный':'Кара','синий':'Көк','зелёный':'Жашыл','жёлтый':'Сары',
-  'я тебя люблю':'Мен сени сүйөм','до свидания':'Жакшы бол','извините':'Кечиресиз',
-  'простите':'Кечиресиз','добро пожаловать':'Кош келиңиз','где':'Кайда','что':'Эмне','кто':'Ким',
+ 
+// Russian → Kyrgyz
+const DICT_RU = {
+  // Phrases
+  'как дела': 'Кандайсыз?',
+  'как вы': 'Кандайсыз?',
+  'как ты': 'Кандайсың?',
+  'доброе утро': 'Куттуктайм таңыңыз',
+  'добрый день': 'Куттуктайм күнүңүз',
+  'добрый вечер': 'Куттуктайм кечиңиз',
+  'спокойной ночи': 'Жакшы жаткыла',
+  'большое спасибо': 'Чоң рахмат',
+  'я в порядке': 'Мен жакшымын',
+  'меня зовут': 'Менин атым',
+  'как вас зовут': 'Атыңыз ким?',
+  'как тебя зовут': 'Атың ким?',
+  'приятно познакомиться': 'Таанышканыма кубандым',
+  'до свидания': 'Кош болуңуз',
+  'до встречи': 'Кийинчерээк көрүшөбүз',
+  'где находится': 'Кайда жайгашкан?',
+  'пещера где': 'Үңкүр кайда?',
+  'где пещера': 'Үңкүр кайда?',
+  'где город': 'Шаар кайда?',
+  'хочу знать': 'Мен билгим келет',
+  'хочу узнать': 'Мен билгим келет',
+  'сколько стоит': 'Канча турат?',
+  'не понимаю': 'Мен түшүнбөдүм',
+  'я не понимаю': 'Мен түшүнбөдүм',
+  'помогите пожалуйста': 'Жардам берсеңиз болобу?',
+  'я тебя люблю': 'Мен сени жакшы көрөм',
+  'я вас люблю': 'Мен сизди жакшы көрөм',
+  // Words
+  'привет': 'Салам', 'здравствуй': 'Саламатсызбы', 'здравствуйте': 'Саламатсызбы',
+  'пока': 'Жакшы бол', 'прощай': 'Кош болуңуз',
+  'спасибо': 'Рахмат', 'пожалуйста': 'Сураныч', 'извини': 'Кечиресиз',
+  'извините': 'Кечиресиз', 'прости': 'Кечиресиз',
+  'да': 'Ооба', 'нет': 'Жок', 'ок': 'Макул', 'хорошо': 'Жакшы',
+  'может быть': 'Балким',
+  // Question words
+  'где': 'Кайда', 'когда': 'Качан', 'что': 'Эмне', 'кто': 'Ким',
+  'зачем': 'Эмне үчүн', 'почему': 'Эмне үчүн', 'как': 'Кандай',
+  'сколько': 'Канча', 'какой': 'Кайсы', 'какая': 'Кайсы',
+  // Pronouns
+  'я': 'Мен', 'ты': 'Сен', 'он': 'Ал', 'она': 'Ал', 'мы': 'Биз',
+  'они': 'Алар', 'мне': 'Мага', 'моя': 'Менин', 'мой': 'Менин',
+  // Verbs
+  'хочу': 'каалайм', 'хочется': 'каалайм', 'знаю': 'билем',
+  'иду': 'барам', 'иди': 'бар', 'прихожу': 'келем',
+  'вижу': 'көрөм', 'ем': 'жейм', 'пью': 'ичем',
+  'сплю': 'уктайм', 'говорю': 'сүйлөйм', 'слушаю': 'угам',
+  'читаю': 'окуйм', 'пишу': 'жазам', 'помогу': 'жардам берем',
+  'люблю': 'жакшы көрөм', 'нравится': 'жактырам',
+  'есть': 'бар', 'нужно': 'керек', 'понимаю': 'түшүнөм',
+  'живу': 'жашайм', 'думаю': 'ойлойм',
+  // Places
+  'пещера': 'үңкүр', 'пещеру': 'үңкүрдү', 'дом': 'үй', 'школа': 'мектеп',
+  'город': 'шаар', 'деревня': 'айыл', 'страна': 'өлкө',
+  'улица': 'көчө', 'дорога': 'жол', 'рынок': 'базар', 'магазин': 'дүкөн',
+  'больница': 'оорукана', 'гостиница': 'мейманкана', 'аэропорт': 'аэропорт',
+  'вокзал': 'бекет', 'парк': 'парк', 'гора': 'тоо',
+  'река': 'дарыя', 'озеро': 'көл', 'море': 'деңиз',
+  'лес': 'токой', 'поле': 'талаа', 'пустыня': 'чөл',
+  // Food
+  'вода': 'Суу', 'еда': 'тамак', 'хлеб': 'нан', 'молоко': 'сүт',
+  'чай': 'чай', 'кофе': 'кофе', 'мясо': 'эт', 'рис': 'күрүч',
+  'яблоко': 'алма', 'фрукт': 'жемиш', 'овощ': 'жашылча',
+  // Objects
+  'телефон': 'телефон', 'книга': 'китеп', 'машина': 'машина', 'деньги': 'акча',
+  'сумка': 'сумка', 'ключ': 'ачкыч', 'дверь': 'эшик', 'окно': 'терезе',
+  'стол': 'стол', 'стул': 'отургуч', 'кровать': 'керебет',
+  // Nature
+  'солнце': 'күн', 'луна': 'ай', 'звезда': 'жылдыз', 'небо': 'асман',
+  'земля': 'жер', 'огонь': 'от', 'ветер': 'шамал', 'дождь': 'жамгыр',
+  'снег': 'кар', 'облако': 'булут', 'цветок': 'гүл', 'дерево': 'дарак',
+  // People
+  'мама': 'апа', 'папа': 'ата', 'сестра': 'эже/сиңди',
+  'брат': 'ага/ини', 'друг': 'дос', 'мужчина': 'эркек',
+  'женщина': 'аял', 'ребёнок': 'бала', 'мальчик': 'бала', 'девочка': 'кыз',
+  // Colors
+  'красный': 'кызыл', 'синий': 'көк', 'зелёный': 'жашыл', 'жёлтый': 'сары',
+  'чёрный': 'кара', 'белый': 'ак',
+  // Numbers
+  'один': 'бир', 'два': 'эки', 'три': 'үч', 'четыре': 'төрт', 'пять': 'беш',
+  'шесть': 'алты', 'семь': 'жети', 'восемь': 'сегиз', 'девять': 'тогуз', 'десять': 'он',
+  // Adjectives
+  'плохой': 'жаман', 'большой': 'чоң', 'маленький': 'кичине',
+  'новый': 'жаңы', 'старый': 'эски', 'быстрый': 'тез', 'медленный': 'жай',
+  'красивый': 'сулуу', 'горячий': 'ысык', 'холодный': 'суук', 'счастливый': 'бактылуу',
+  'грустный': 'кайгылуу', 'уставший': 'чарчаган', 'голодный': 'ач',
+  // Time
+  'сегодня': 'бүгүн', 'завтра': 'эртең', 'вчера': 'кечээ',
+  'сейчас': 'азыр', 'потом': 'кийинчерээк', 'утром': 'эртең менен',
+  'вечером': 'кечинде', 'ночью': 'түндө', 'неделя': 'жума',
+  'месяц': 'ай', 'год': 'жыл',
+  // Skip
+  'и': '', 'в': '', 'на': '', 'к': '', 'с': '', 'из': '', 'от': '', 'по': '',
+  'не': 'эмес', 'это': 'бул', 'тот': 'ал', 'та': 'ал', 'что': 'эмне',
 };
-
+ 
 function translateToKyrgyz(text) {
-  const dict  = currentLang === 'ru' ? voiceDictRU : voiceDictEN;
-  const lower = text.toLowerCase().trim();
-  if (dict[lower]) return dict[lower];
-  const words = lower.split(/\s+/).map(w => dict[w]).filter(Boolean);
-  return words.length ? words.join(' ') : null;
-}
-
-const voiceMicBtnEl   = document.getElementById('voiceMicBtn');
-const voiceMicLabelEl = document.getElementById('voiceMicLabel');
-const voiceInputEl    = document.getElementById('voiceInput');
-const voiceOutputEl   = document.getElementById('voiceOutput');
-const voiceHistoryEl  = document.getElementById('voiceHistory');
-let voiceListening    = false;
-let voiceRecognizer   = null;
-
-voiceMicBtnEl?.addEventListener('click', () => {
-  if (voiceListening) { voiceRecognizer?.stop(); return; }
-  if (!SpeechRecognition) {
-    if (voiceInputEl) voiceInputEl.textContent = currentLang === 'ru' ? 'Используйте Chrome для распознавания речи.' : 'Use Chrome for speech recognition.';
-    return;
-  }
-  voiceListening = true;
-  voiceMicBtnEl.classList.add('listening');
-  if (voiceMicLabelEl) voiceMicLabelEl.textContent = currentLang === 'ru' ? 'Слушаю...' : 'Listening...';
-  if (voiceInputEl)  voiceInputEl.innerHTML  = `<span class="voice-placeholder">${currentLang === 'ru' ? 'Говорите сейчас...' : 'Speak now...'}</span>`;
-  if (voiceOutputEl) voiceOutputEl.innerHTML = `<span class="voice-placeholder">${currentLang === 'ru' ? 'Переводим...' : 'Translating...'}</span>`;
-  voiceRecognizer = new SpeechRecognition();
-  voiceRecognizer.lang = currentLang === 'ru' ? 'ru-RU' : 'en-US';
-  voiceRecognizer.interimResults = true;
-  voiceRecognizer.onresult = ev => {
-    const transcript = ev.results[0][0].transcript;
-    if (voiceInputEl) voiceInputEl.textContent = transcript;
-    if (ev.results[0].isFinal) {
-      const tr = translateToKyrgyz(transcript);
-      if (voiceOutputEl) voiceOutputEl.textContent = tr || (currentLang === 'ru' ? '🤔 Слово ещё не в словаре' : '🤔 Word not in dictionary yet');
-      if (tr && voiceHistoryEl) {
-        const item = document.createElement('div');
-        item.className = 'voice-history-item';
-        item.innerHTML = `<span>${transcript}</span><span>${tr}</span>`;
-        voiceHistoryEl.prepend(item);
-      }
+  const isRu = /[а-яёА-ЯЁ]/.test(text);
+  const dict = isRu ? DICT_RU : DICT_EN;
+  let input = text.toLowerCase().trim().replace(/[!?.]+$/, '');
+ 
+  // 1. Full phrase match
+  if (dict[input]) return dict[input];
+ 
+  // 2. Multi-word phrase match (longest first)
+  const multiPhrases = Object.keys(dict).filter(k => k.includes(' ')).sort((a,b) => b.length - a.length);
+  let working = input;
+  for (const phrase of multiPhrases) {
+    if (working.includes(phrase)) {
+      working = working.replace(phrase, ' __REPL_' + Object.keys(dict).indexOf(phrase) + '__ ');
     }
-  };
-  voiceRecognizer.onerror = () => resetVoice(true);
-  voiceRecognizer.onend   = () => resetVoice(false);
-  voiceRecognizer.start();
-});
-
-function resetVoice(clearBoxes) {
-  voiceListening = false; voiceRecognizer = null;
-  voiceMicBtnEl?.classList.remove('listening');
-  if (voiceMicLabelEl) voiceMicLabelEl.textContent = currentLang === 'ru' ? 'Нажмите, чтобы говорить' : 'Tap to speak';
-  if (clearBoxes) {
-    if (voiceInputEl)  voiceInputEl.innerHTML  = `<span class="voice-placeholder">${translations[currentLang]['voice.placeholder']}</span>`;
-    if (voiceOutputEl) voiceOutputEl.innerHTML = `<span class="voice-placeholder">${translations[currentLang]['voice.result']}</span>`;
   }
+ 
+  // 3. Expand replacements back
+  working = working.replace(/__REPL_(\d+)__/g, (_, idx) => {
+    const key = Object.keys(dict)[+idx];
+    return dict[key] || key;
+  });
+ 
+  // 4. Word-by-word
+  const words = working.split(/\s+/);
+  const parts = words.map(word => {
+    const clean = word.replace(/[.,!?;:'"]/g, '').toLowerCase();
+    if (!clean) return null;
+    const tr = dict[clean];
+    if (tr === '') return null;
+    if (tr) return tr;
+    return word;
+  }).filter(Boolean);
+ 
+  if (!parts.length) return text;
+  const result = parts.join(' ');
+  return result.charAt(0).toUpperCase() + result.slice(1);
 }
+ 
+// ── Voice Translator UI
+const voiceHistoryArr = [];
+ 
+function initVoiceTranslator() {
+  const micBtn = document.getElementById('voiceMicBtn');
+  const micLabel = document.getElementById('voiceMicLabel');
+  const inputEl = document.getElementById('voiceInput');
+  const outputEl = document.getElementById('voiceOutput');
+  const historyEl = document.getElementById('voiceHistory');
+  if (!micBtn) return;
+ 
+  let recognition = null, isListening = false;
+ 
+  if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SR();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+ 
+    recognition.onstart = () => {
+      micBtn.classList.add('mic-active');
+      micLabel.textContent = currentLang === 'ru' ? '🔴 Слушаю...' : '🔴 Listening...';
+    };
+ 
+    recognition.onresult = (e) => {
+      let interimText = '', finalText = '';
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const t = e.results[i][0].transcript;
+        if (e.results[i].isFinal) finalText += t;
+        else interimText += t;
+      }
+      const display = finalText || interimText;
+      inputEl.innerHTML = `<span class="voice-text">${escHtml(display)}</span>`;
+      const partial = translateToKyrgyz(display);
+      outputEl.innerHTML = `<span class="voice-text voice-text--kg${!finalText ? ' voice-text--interim' : ''}">${escHtml(partial)}</span>`;
+      if (finalText) {
+        voiceHistoryArr.unshift({ original: finalText, translated: partial });
+        renderVoiceHistory(historyEl);
+        setTimeout(() => speakKyrgyz(partial), 400);
+      }
+    };
+ 
+    recognition.onend = () => {
+      micBtn.classList.remove('mic-active');
+      isListening = false;
+      micLabel.textContent = currentLang === 'ru' ? 'Нажми чтобы говорить' : 'Tap to speak';
+    };
+ 
+    recognition.onerror = (e) => {
+      micBtn.classList.remove('mic-active');
+      isListening = false;
+      const msg = e.error === 'not-allowed'
+        ? (currentLang === 'ru' ? 'Нет доступа к микрофону' : 'Microphone access denied')
+        : (currentLang === 'ru' ? 'Ошибка' : 'Error');
+      micLabel.textContent = msg;
+    };
+  }
+ 
+  micBtn.addEventListener('click', () => {
+    if (!recognition) { micLabel.textContent = currentLang === 'ru' ? 'Не поддерживается' : 'Not supported'; return; }
+    if (isListening) { recognition.stop(); isListening = false; }
+    else { recognition.lang = currentLang === 'ru' ? 'ru-RU' : 'en-US'; recognition.start(); isListening = true; }
+  });
+ 
+  injectManualInput(inputEl, outputEl, historyEl);
+}
+ 
+function injectManualInput(inputEl, outputEl, histEl) {
+  if (document.getElementById('manualTranslateWrap')) return;
+  const voiceCard = document.querySelector('.voice-card');
+  if (!voiceCard) return;
+  const wrap = document.createElement('div');
+  wrap.id = 'manualTranslateWrap';
+  wrap.className = 'manual-translate-wrap';
+  wrap.innerHTML = `
+    <div class="manual-divider"><span>${currentLang === 'ru' ? '— или введите текст —' : '— or type text —'}</span></div>
+    <div class="manual-row">
+      <input type="text" id="manualInput" class="manual-input" placeholder="${currentLang === 'ru' ? 'Введите текст для перевода...' : 'Type to translate...'}">
+      <button class="btn btn--primary btn--sm" id="manualBtn">${currentLang === 'ru' ? 'Перевести' : 'Translate'}</button>
+    </div>
+  `;
+  voiceCard.appendChild(wrap);
+ 
+  const doTranslate = () => {
+    const text = document.getElementById('manualInput').value.trim();
+    if (!text) return;
+    const translated = translateToKyrgyz(text);
+    inputEl.innerHTML = `<span class="voice-text">${escHtml(text)}</span>`;
+    outputEl.innerHTML = `<span class="voice-text voice-text--kg">${escHtml(translated)}</span>`;
+    voiceHistoryArr.unshift({ original: text, translated });
+    renderVoiceHistory(histEl);
+    speakKyrgyz(translated);
+    document.getElementById('manualInput').value = '';
+  };
+ 
+  document.getElementById('manualBtn')?.addEventListener('click', doTranslate);
+  document.getElementById('manualInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') doTranslate(); });
+}
+ 
+function renderVoiceHistory(el) {
+  if (!el) return;
+  el.innerHTML = voiceHistoryArr.slice(0, 8).map(h => `
+    <div class="voice-hist-item">
+      <span class="voice-hist-orig">${escHtml(h.original)}</span>
+      <span class="voice-hist-arrow">→</span>
+      <span class="voice-hist-kg">${escHtml(h.translated)}</span>
+      <button class="voice-hist-play" onclick="speakKyrgyz('${h.translated.replace(/'/g,"\\'")}')">🔊</button>
+    </div>`).join('');
+}
+ 
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+ 
+// ═══════════════════════════════════════════════════════════
+// DOWNLOAD TOGGLE
+// ═══════════════════════════════════════════════════════════
+function initDownloadToggle() {
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.download-panel').forEach(p => p.classList.add('hidden'));
+      const id = 'panel' + btn.dataset.platform[0].toUpperCase() + btn.dataset.platform.slice(1);
+      document.getElementById(id)?.classList.remove('hidden');
+    });
+  });
+}
+ 
+// ═══════════════════════════════════════════════════════════
+// LANG CARDS
+// ═══════════════════════════════════════════════════════════
+function initLangCards() {
+  document.querySelectorAll('.lang-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.lang-card').forEach(c => { c.classList.remove('lang-card--active'); c.setAttribute('aria-pressed','false'); });
+      card.classList.add('lang-card--active'); card.setAttribute('aria-pressed','true');
+    });
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') card.click(); });
+  });
+}
+ 
+// ═══════════════════════════════════════════════════════════
+// NAVBAR SCROLL
+// ═══════════════════════════════════════════════════════════
+function initNavbarScroll() {
+  const nav = document.querySelector('.navbar');
+  if (!nav) return;
+  window.addEventListener('scroll', () => nav.classList.toggle('navbar--scrolled', window.scrollY > 50), { passive: true });
+}
+ 
+// ═══════════════════════════════════════════════════════════
+// EXTRA STYLES
+// ═══════════════════════════════════════════════════════════
+function injectStyles() {
+  const s = document.createElement('style');
+  s.textContent = `
+    .voice-text{font-size:1rem;line-height:1.6;font-weight:500;color:inherit;}
+    .voice-text--kg{font-size:1.1rem;font-weight:700;color:var(--primary,#e8400c);}
+    .voice-text--interim{opacity:.5;}
+    .manual-translate-wrap{margin-top:20px;}
+    .manual-divider{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .manual-divider::before,.manual-divider::after{content:'';flex:1;height:1px;background:rgba(0,0,0,0.1);}
+    .manual-divider span{font-size:12px;color:#888;white-space:nowrap;}
+    .manual-row{display:flex;gap:8px;}
+    .manual-input{flex:1;padding:10px 14px;border:1.5px solid rgba(0,0,0,0.15);border-radius:10px;font-size:.95rem;outline:none;font-family:inherit;background:rgba(255,255,255,.7);}
+    .manual-input:focus{border-color:var(--primary,#e8400c);}
+    .voice-history{margin-top:16px;display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;}
+    .voice-hist-item{display:flex;align-items:center;gap:8px;padding:9px 12px;background:rgba(0,0,0,.04);border-radius:9px;flex-wrap:wrap;}
+    .voice-hist-orig{font-size:.85rem;color:#555;flex:1;min-width:100px;}
+    .voice-hist-arrow{color:#bbb;font-size:.8rem;}
+    .voice-hist-kg{font-size:.9rem;font-weight:700;color:var(--primary,#e8400c);flex:1;min-width:100px;}
+    .voice-hist-play{background:none;border:none;cursor:pointer;font-size:.95rem;padding:2px 6px;opacity:.7;}
+    .voice-hist-play:hover{opacity:1;}
+    .mic-active{animation:micPulse 1s ease infinite!important;}
+    @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,64,12,.5)}50%{box-shadow:0 0 0 14px rgba(232,64,12,0)}}
+    .fc-filter-bar{display:flex;gap:8px;justify-content:center;margin-bottom:18px;flex-wrap:wrap;}
+    .fc-filter-btn{padding:7px 16px;border-radius:99px;border:1.5px solid rgba(0,0,0,.12);background:transparent;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;}
+    .fc-filter-btn.active,.fc-filter-btn:hover{background:var(--primary,#e8400c);color:#fff;border-color:var(--primary,#e8400c);}
+    .fc-active-know{background:#22c55e!important;color:#fff!important;border-color:#22c55e!important;}
+    .fc-active-repeat{background:#f59e0b!important;color:#fff!important;border-color:#f59e0b!important;}
+    .lesson-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;background:rgba(0,0,0,.03);margin-bottom:7px;animation:liFadeIn .3s ease both;}
+    .lesson-item__kg{font-size:1rem;font-weight:700;color:var(--primary,#e8400c);min-width:130px;}
+    .lesson-item__tr{font-size:.875rem;color:#555;flex:1;}
+    .lesson-item__play{background:none;border:none;cursor:pointer;font-size:1rem;padding:3px 7px;opacity:.7;transition:opacity .2s;border-radius:6px;}
+    .lesson-item__play:hover{opacity:1;background:rgba(0,0,0,.06);}
+    @keyframes liFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .photo-label-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:rgba(0,0,0,.04);margin-bottom:8px;}
+    .photo-label-emoji{font-size:1.3rem;}
+    .photo-label-kg{font-weight:700;font-size:.95rem;color:var(--primary,#e8400c);min-width:75px;}
+    .photo-label-tr{font-size:.85rem;color:#555;flex:1;}
+    .photo-label-play{background:none;border:none;cursor:pointer;font-size:.95rem;opacity:.7;}
+    .photo-label-play:hover{opacity:1;}
+  `;
+  document.head.appendChild(s);
+}
+ 
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  injectStyles();
+  applyI18n('en');
+  initBurger();
+  initNavbarScroll();
+  initScrollAnimations();
+  initCounters();
+  initQuiz();
+  initLessonTree();
+  initFlashcards();
+  initAITabs();
+  initVoiceTutor();
+  initPhotoTranslator();
+  initVoiceTranslator();
+  initDownloadToggle();
+  initLangCards();
 });
-
-
-/* ============================================================
-   12. SCROLL-TO-TOP BUTTON
-   ============================================================ */
-
-const scrollBtn = Object.assign(document.createElement('button'), {
-  innerHTML:  '↑',
-  ariaLabel:  'Back to top',
-});
-scrollBtn.style.cssText = `
-  position:fixed; bottom:1.75rem; right:1.75rem;
-  width:44px; height:44px; border-radius:50%;
-  background:var(--primary); color:#fff;
-  font-size:1.1rem; font-weight:700;
-  border:none; cursor:pointer;
-  box-shadow:0 4px 16px rgba(79,142,247,.4);
-  opacity:0; transform:translateY(12px);
-  transition:opacity .3s,transform .3s;
-  z-index:99; display:flex; align-items:center; justify-content:center;
-`;
-document.body.appendChild(scrollBtn);
-scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-window.addEventListener('scroll', () => {
-  const show = window.scrollY > 400;
-  scrollBtn.style.opacity   = show ? '1' : '0';
-  scrollBtn.style.transform = show ? 'translateY(0)' : 'translateY(12px)';
-}, { passive: true });
-
-
-/* ============================================================
-   13. INIT
-   ============================================================ */
-
-applyTranslations('en');

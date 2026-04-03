@@ -568,6 +568,53 @@ button { font-family: var(--font); }
    RESPONSIVE
    ============================================================ */
 @media (max-width: 960px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: .75rem 1rem;
+    gap: .75rem;
+  }
+  .logo { margin-right: auto; }
+  .burger { display: flex; margin-left: 0; }
+
+  .nav-links {
+    order: 4;
+    width: 100%;
+    margin-left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: .3rem;
+    padding: .75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.98);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-links.open,
+  .header.menu-open .nav-links { display: flex; }
+  .nav-links a {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    padding: .65rem .55rem;
+    border-radius: var(--radius-xs);
+  }
+  .nav-links a::after { display: none; }
+  .nav-links a:hover { background: var(--bg2); }
+
+  .nav-actions {
+    order: 5;
+    width: 100%;
+    margin-left: 0;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .15rem .75rem .75rem;
+  }
+  .header.menu-open .nav-actions { display: flex; }
+  .nav-actions .btn--sm { display: inline-flex; }
+
   .hero__inner       { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
   .hero__actions     { justify-content: center; }
   .hero__stats       { justify-content: center; }
@@ -583,18 +630,25 @@ button { font-family: var(--font); }
 @media (max-width: 640px) {
   .section { padding: 3.5rem 0; }
 
-  .nav-links {
-    display: none; position: fixed;
-    top: 65px; left: 0; right: 0; bottom: 0;
-    background: rgba(255,255,255,.97);
-    backdrop-filter: blur(16px);
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 2rem; z-index: 150;
+  .navbar { padding: .7rem .9rem; }
+  .header.menu-open .nav-links {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
   }
-  .nav-links.open { display: flex; }
-  .nav-links a    { font-size: 1.1rem; }
-  .nav-actions .btn--sm { display: none; }
-  .burger         { display: flex; }
+  .header.menu-open .nav-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .65rem;
+    padding: .35rem .75rem 1rem;
+  }
+  .nav-actions .btn--sm { width: 100%; justify-content: center; }
+  .lang-switcher {
+    justify-content: center;
+    width: 100%;
+    background: var(--bg2);
+    border-radius: 99px;
+    padding: .3rem .6rem;
+  }
 
   .features-grid  { grid-template-columns: 1fr; }
   .lang-cards     { grid-template-columns: 1fr; }
